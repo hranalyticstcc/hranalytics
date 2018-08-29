@@ -9,7 +9,7 @@ import br.com.hr.analytics.ws.client.WatsonPersonalityInsights;
 import twitter4j.TwitterException;
 
 public class Teste {
-
+	/*
 	public static void main(String[] args) throws TwitterException {		
 		List<String> tweets = new ArrayList<String>();
 		
@@ -21,4 +21,5 @@ public class Teste {
 		WatsonPersonalityInsights insights = new WatsonPersonalityInsights();		
 		insights.analisarPerfil(json);
 	}
+	*/
 }
