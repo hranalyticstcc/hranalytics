@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>HR ANALYTCS</title>
+
+    <!-- Font Awesome -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,600,300,300italic,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+
+    <!-- Material Design Bootstrap -->
+    <link href="css/materialize.css" rel="stylesheet">
+
+    <!-- Magnific-popup css -->
+    <link href="css/magnific-popup.css" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <!--<link href="css/progressbar.css" rel="stylesheet">-->
+
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+
+</head>
+
+<body data-spy="scroll" data-target=".navbar-desktop">
+
+    <!--Navbar-->
+
+    <nav class="navbar navbar-fixed-top navbar-light bg-faded">
+        <!--Collapse button-->
+        <div class="container">
+            <a href="#" data-activates="mobile-menu" class="button-collapse right">
+                <i class="fa fa-bars black-text"></i>
+            </a>
+
+            <!--Content for large and medium screens-->
+            <div class="navbar-desktop">
+                <!--Navbar Brand-->
+                <a class="navbar-brand" href="index.html">
+                    <img src="img/logotipo2.png" alt="" />
+                </a>
+                <!--Links-->
+                <ul class="nav navbar-nav pull-right hidden-md-down text-uppercase" id="desktop-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Página Principal
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- LINKS-->
+            <div class="navbar-mobile">
+                <ul class="side-nav" id="mobile-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="joinus" id "secaoBuscarTwitter">
+        <div class="main_joinus_area m-y-3">
+            <div class="container">
+                <div class="row">
+                    <br>
+                    <br>
+                    <div class="col-md-8 col-md-offset-3 section-title">
+                        <h3>Analisar Perfil</h3>
+                        <p>Faça a pesquisa do perfil para extrair os tweets.</p>
+                    </div>
+                </div>
+
+                <form name="buscarTweeter" id="formBuscarTweeter">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Perfil do Twitter*:</label>
+                            <input type="text" id="usuarioTweeter" name="usuarioCandidato" class="form-control" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-default" onclick="validaUsuarioTweeter()"> Buscar Perfil
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--container-->
+            <hr/>
+            <!-- DashBoard -->
+            <div class="container">
+                <div class="dashboard" id="IDdashboard">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-3 section-title">
+                            <h4>Personalidades</h4>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="columnchart_values1"></div> <!--style="width: 900px; height: 300px;"-->
+                        </div>
+                        <!--Col-->
+                        <div class="col-md-6">
+                            <div id="columnchart_values2"></div>
+                        </div>
+                        <!--Col-->
+                    </div>
+                        <br>
+                    <!--Rown-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="columnchart_values3"></div>
+                        </div>
+                        <!--Col-->
+                        <div class="col-md-6">
+                            <div id="columnchart_values4"></div>
+                        </div>
+                        <!--Col-->
+                    </div><!--Rown-->
+                        <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="columnchart_values5"></div>
+                        </div>
+                        <!--Col-->
+                    </div>
+            </div><!--container-->
+        </div><!--joinus-->
+    </section>
+</body>
+
+</html>
+
+
+<!-- SCRIPTS -->
+
+
+<!-- grafico da google -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!-- JQuery -->
+<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="js/tether.min.js"></script>
+
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+
+<!-- Wow js -->
+<script type="text/javascript" src="js/wow.min.js"></script>
+
+<!-- Mixitup js -->
+<script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+
+<!-- Magnific-popup js -->
+<script type="text/javascript" src="js/jquery.magnific-popup.js"></script>
+
+<!-- accordion js -->
+<script type="text/javascript" src="js/accordion.js"></script>
+
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/materialize.js"></script>
+
+<!-- Funcões do nosso site-->
+<script type="text/javascript" src="js/funcoes.js"></script>
+
+<!-- wow js active -->
+<script type="text/javascript" src="js/plugins.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+
+
+</html>
