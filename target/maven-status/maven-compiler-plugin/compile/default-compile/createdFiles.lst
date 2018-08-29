@@ -1,0 +1,7 @@
+br\com\hr\analytics\ws\client\WatsonPersonalityInsights.class
+br\com\hr\analytics\ws\server\PersonalidadeService.class
+br\com\hr\analytics\ws\client\AnalisaPerfil.class
+br\com\hr\analytics\json\MontaJson.class
+br\com\hr\analytics\SpringStarter.class
+br\com\hr\analytics\teste\Teste.class
+br\com\hr\analytics\ws\client\TwitterAPI.class
