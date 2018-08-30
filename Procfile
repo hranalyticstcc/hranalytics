@@ -1,1 +1,1 @@
-web: java -war target/HRAnalytics.war
+web: java -jar target/HRAnalytics.war
