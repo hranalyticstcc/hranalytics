@@ -232,16 +232,53 @@ function carregarDashBoard() {
 
 function drawChart() {
 
-    var aventureiro =100, interesses_Artisticos = 56, emocao = 57, imaginacao = 65, intelecto = 76, liberalismo = 83;
+    var perfil = document.getElementById('usuarioTweeter').value;
 
-    var esforcado= 27, cuidadoso=39, obediencia= 55, comportamento= 62, disciplina= 82, eficacia= 30;
+    $.get("/personalidade/analisa/" + perfil, function (data) {
 
-    var proatividade= 27, assertividade= 39, alegria=55, procura_de_desafios= 62, simpatia= 82, social= 30;
+        var aventureiro = data.bigFive[0].filhos[0].porcentagem * 100;
+        var interesses_Artisticos = data.bigFive[0].filhos[1].porcentagem * 100;
+        var emocao = data.bigFive[0].filhos[2].porcentagem * 100;
+        var imaginacao = data.bigFive[0].filhos[3].porcentagem * 100;
+        var intelecto = data.bigFive[0].filhos[4].porcentagem * 100;
+        var liberalismo = data.bigFive[0].filhos[5].porcentagem * 100;
+        drawSentimentos(aventureiro, interesses_Artisticos, emocao, imaginacao, intelecto, liberalismo);
 
-    var altruismo = 27, cooperacao =39, modestidade = 55, moralidade=62, simpaticidade=82, confianca = 30;
+        var esforcado = data.bigFive[1].filhos[0].porcentagem * 100;
+        var cuidadoso = data.bigFive[1].filhos[1].porcentagem * 100;
+        var obediencia = data.bigFive[1].filhos[2].porcentagem * 100;
+        var comportamento = data.bigFive[1].filhos[3].porcentagem * 100;
+        var disciplina = data.bigFive[1].filhos[4].porcentagem * 100;
+        var eficacia = data.bigFive[1].filhos[5].porcentagem * 100;
+        drawConsciencia(esforcado, cuidadoso, obediencia, comportamento, disciplina, eficacia);
 
-    var raiva=27, ansiedade= 39, depressao= 55, imoderacao=62, auto_conciencia=82, vulnerabilidade=30;
+        var proatividade = data.bigFive[2].filhos[0].porcentagem * 100;
+        var assertividade = data.bigFive[2].filhos[1].porcentagem * 100;
+        var alegria = data.bigFive[2].filhos[2].porcentagem * 100;
+        var procura_de_desafios = data.bigFive[2].filhos[3].porcentagem * 100;
+        var simpatia = data.bigFive[2].filhos[4].porcentagem * 100;
+        var social = data.bigFive[2].filhos[5].porcentagem * 100;
+        drawExtroversao(proatividade, assertividade, alegria, procura_de_desafios, simpatia, social);
 
+        var altruismo = data.bigFive[3].filhos[0].porcentagem * 100;
+        var cooperacao = data.bigFive[3].filhos[1].porcentagem * 100;
+        var modestidade = data.bigFive[3].filhos[2].porcentagem * 100;
+        var moralidade = data.bigFive[3].filhos[3].porcentagem * 100;
+        var simpaticidade = data.bigFive[3].filhos[4].porcentagem * 100;
+        var confianca = data.bigFive[3].filhos[5].porcentagem * 100;
+        drawAgregabilidade(altruismo, cooperacao, modestidade, moralidade, simpaticidade, confianca);
+
+        var raiva = data.bigFive[4].filhos[0].porcentagem * 100;
+        var ansiedade = data.bigFive[4].filhos[1].porcentagem * 100;
+        var depressao = data.bigFive[4].filhos[2].porcentagem * 100;
+        var imoderacao = data.bigFive[4].filhos[3].porcentagem * 100;
+        var auto_conciencia = data.bigFive[4].filhos[4].porcentagem * 100;
+        var vulnerabilidade = data.bigFive[4].filhos[5].porcentagem * 100;
+        drawNeuroticismo(raiva, ansiedade, depressao, imoderacao, auto_conciencia, vulnerabilidade);
+    })
+}
+
+function drawSentimentos(aventureiro,interesses_Artisticos, emocao, imaginacao, intelecto, liberalismo){
     //sentimentos------------------------------------------------------------------
     var data1 = google.visualization.arrayToDataTable([
         ["Elemento", "Densidade", { role: "style" }],
@@ -272,7 +309,9 @@ function drawChart() {
 
     var chart1 = new google.visualization.ColumnChart(document.getElementById("columnchart_values1"));
     chart1.draw(view1, options1);
+}
 
+function drawConsciencia(esforcado, cuidadoso, obediencia, comportamento, disciplina, eficacia){
     //consciencia
     var data2 = google.visualization.arrayToDataTable([
         ["Elemento", "Densidade", { role: "style" }],
@@ -304,7 +343,9 @@ function drawChart() {
 
     var chart2 = new google.visualization.ColumnChart(document.getElementById("columnchart_values2"));
     chart2.draw(view2, options2);
+}
 
+function drawExtroversao(proatividade, assertividade, alegria, procura_de_desafios, simpatia, social){
     //extroversao
     var data3 = google.visualization.arrayToDataTable([
         ["Elemento", "Densidade", { role: "style" }],
@@ -337,6 +378,9 @@ function drawChart() {
     var chart3 = new google.visualization.ColumnChart(document.getElementById("columnchart_values3"));
     chart3.draw(view3, options3);
 
+}
+
+function drawAgregabilidade(altruismo, cooperacao, modestidade, moralidade, simpaticidade, confianca){
     //agregabilidade
     var data4 = google.visualization.arrayToDataTable([
         ["Elemento", "Densidade", { role: "style" }],
@@ -368,7 +412,9 @@ function drawChart() {
 
     var chart4 = new google.visualization.ColumnChart(document.getElementById("columnchart_values4"));
     chart4.draw(view4, options4);
+}
 
+function drawNeuroticismo(raiva, ansiedade, depressao, imoderacao, auto_conciencia, vulnerabilidade){
     //Neuroticismo
     var data5 = google.visualization.arrayToDataTable([
         ["Elemento", "Densidade", { role: "style" }],
@@ -400,5 +446,5 @@ function drawChart() {
 
     var chart5 = new google.visualization.ColumnChart(document.getElementById("columnchart_values5"));
     chart5.draw(view5, options5);
-}
 
+}
