@@ -4,70 +4,90 @@ import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Usuario {
 	
-	@Id
-	@GeneratedValue
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	private String nome;
 	
-	private String usuarioTwitter;
+	private String usuario;
 	
 	private String email;
 	
 	@Temporal(TemporalType.DATE)
 	private Calendar dataNascimento;
 	
+	@JsonIgnore
+	private String senha;
+	
 	public Usuario() {
 		super();
 	}
-	public Usuario(Long id, String nome, String usuarioTwitter, String email, Calendar dataNascimento) {
+
+	public Usuario(Long id, String nome, String usuario, String email, Calendar dataNascimento, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.usuarioTwitter = usuarioTwitter;
+		this.usuario = usuario;
 		this.email = email;
 		this.dataNascimento = dataNascimento;
+		this.senha = senha;
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getUsuarioTwitter() {
-		return usuarioTwitter;
+
+	public String getUsuario() {
+		return usuario;
 	}
-	public void setUsuarioTwitter(String usuarioTwitter) {
-		this.usuarioTwitter = usuarioTwitter;
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public Calendar getDataNascimento() {
 		return dataNascimento;
 	}
+
 	public void setDataNascimento(Calendar dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", usuarioTwitter=" + usuarioTwitter + ", email=" + email
-				+ ", dataNascimento=" + dataNascimento + "]";
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 }

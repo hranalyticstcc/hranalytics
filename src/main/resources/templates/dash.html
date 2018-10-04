@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -46,13 +46,13 @@
             <!--Content for large and medium screens-->
             <div class="navbar-desktop">
                 <!--Navbar Brand-->
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" th:href="@{/}">
                     <img src="img/logotipo2.png" alt="" />
                 </a>
                 <!--Links-->
                 <ul class="nav navbar-nav pull-right hidden-md-down text-uppercase" id="desktop-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Página Principal
+                        <a class="nav-link" th:href="@{/}">Página Principal
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
@@ -62,12 +62,12 @@
             <div class="navbar-mobile">
                 <ul class="side-nav" id="mobile-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home
+                        <a class="nav-link" th:href="@{/}">Home
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" th:href="@{/}">Home</a>
                     </li>
                 </ul>
             </div>
@@ -114,7 +114,8 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <div id="columnchart_values1"></div> <!--style="width: 900px; height: 300px;"-->
+                            <div id="columnchart_values1"></div>
+                            <!--style="width: 900px; height: 300px;"-->
                         </div>
                         <!--Col-->
                         <div class="col-md-6">
@@ -122,7 +123,7 @@
                         </div>
                         <!--Col-->
                     </div>
-                        <br>
+                    <br>
                     <!--Rown-->
                     <div class="row">
                         <div class="col-md-6">
@@ -133,16 +134,19 @@
                             <div id="columnchart_values4"></div>
                         </div>
                         <!--Col-->
-                    </div><!--Rown-->
-                        <br>
+                    </div>
+                    <!--Rown-->
+                    <br>
                     <div class="row">
                         <div class="col-md-6">
                             <div id="columnchart_values5"></div>
                         </div>
                         <!--Col-->
                     </div>
-            </div><!--container-->
-        </div><!--joinus-->
+                </div>
+                <!--container-->
+            </div>
+            <!--joinus-->
     </section>
 </body>
 

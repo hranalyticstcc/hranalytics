@@ -1,4 +1,4 @@
-package br.com.hranalytics.HrAnalytics.service;
+package br.com.hranalytics.HrAnalytics.ws;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
