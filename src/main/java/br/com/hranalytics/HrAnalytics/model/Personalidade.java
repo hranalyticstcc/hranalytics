@@ -19,16 +19,16 @@ public class Personalidade {
 	private List<Dimensao> bigFive;
 	
 	@OneToOne
-	private Usuario usuario;
+	private Candidato candidato;
 	
 	public Personalidade() {
 		super();
 	}
-	public Personalidade(Long id, List<Dimensao> bigFive, Usuario usuario) {
+	public Personalidade(Long id, List<Dimensao> bigFive, Candidato candidato) {
 		super();
 		this.id = id;
 		this.bigFive = bigFive;
-		this.usuario = usuario;
+		this.candidato = candidato;
 	}
 	public Long getId() {
 		return id;
@@ -42,14 +42,14 @@ public class Personalidade {
 	public void setBigFive(List<Dimensao> bigFive) {
 		this.bigFive = bigFive;
 	}
-	public Usuario getUsuario() {
-		return usuario;
+	public Candidato getCandidato() {
+		return candidato;
 	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setCandidato(Candidato candidato) {
+		this.candidato = candidato;
 	}
 	@Override
 	public String toString() {
-		return "Personalidade [id=" + id + ", bigFive=" + bigFive + ", usuario=" + usuario + "]";
+		return "Personalidade [id=" + id + ", bigFive=" + bigFive + ", candidato=" + candidato + "]";
 	}
 }

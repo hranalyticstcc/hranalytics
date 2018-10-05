@@ -2,30 +2,23 @@ package br.com.hranalytics.HrAnalytics.utils;
 
 import java.util.List;
 
+import com.google.gson.Gson;
+
+import br.com.hranalytics.HrAnalytics.model.Content;
+import br.com.hranalytics.HrAnalytics.model.ConteudosWatsonDTO;
+
 public class MontaJson {
-	
-	public String montaJsonStringBuffer(List<String> tweets){
+
+	public String montaJsonStringBind(List<String> tweets) {
 		
-		StringBuffer sb = new StringBuffer();
-		sb.append("{");
-		sb.append("\"contentItems\":[");
+		ConteudosWatsonDTO cwdto = new ConteudosWatsonDTO();
 		
-		for(int i=0;i<tweets.size();i++) {
-			if(i == tweets.size() -1) {
-				sb.append("{");
-				sb.append("\"content\": \"" + tweets.get(i) + "\"");
-				sb.append("}");
-			}else {
-				sb.append("{");
-				sb.append("\"content\": \"" + tweets.get(i) + "\"");
-				sb.append("}");
-				sb.append(",");
-			}
+		for (String tweet : tweets) {
+			cwdto.addContentItems(new Content(tweet));
 		}
 		
-		sb.append("]}");
-				
-		return sb.toString();
+		Gson gson = new Gson();
+		
+		return gson.toJson(cwdto);
 	}
-
 }

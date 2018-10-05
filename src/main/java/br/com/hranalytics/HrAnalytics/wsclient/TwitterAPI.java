@@ -1,4 +1,4 @@
-package br.com.hranalytics.HrAnalytics.twitter4j;
+package br.com.hranalytics.HrAnalytics.wsclient;
 
 import java.util.ArrayList;
 import java.util.List;

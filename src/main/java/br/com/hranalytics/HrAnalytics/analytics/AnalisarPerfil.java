@@ -1,15 +1,16 @@
 package br.com.hranalytics.HrAnalytics.analytics;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import br.com.hranalytics.HrAnalytics.model.Dimensao;
 import br.com.hranalytics.HrAnalytics.model.DimensaoFilho;
 import br.com.hranalytics.HrAnalytics.model.Personalidade;
-import br.com.hranalytics.HrAnalytics.twitter4j.TwitterAPI;
 import br.com.hranalytics.HrAnalytics.utils.MontaJson;
 import br.com.hranalytics.HrAnalytics.utils.Tradutor;
-import br.com.hranalytics.HrAnalytics.watsonapi.WatsonPersonalityInsights;
+import br.com.hranalytics.HrAnalytics.wsclient.TwitterAPI;
+import br.com.hranalytics.HrAnalytics.wsclient.WatsonPersonalityInsightsAPI;
 import twitter4j.JSONArray;
 import twitter4j.JSONException;
 import twitter4j.JSONObject;
@@ -23,14 +24,18 @@ public class AnalisarPerfil {
 		TwitterAPI apiTwitter = new TwitterAPI();
 		tweets = apiTwitter.pegaLinhaDoTempo(perfil);
 
-		String json = new MontaJson().montaJsonStringBuffer(tweets);
+		String json = new MontaJson().montaJsonStringBind(tweets);
 
-		String perfilAnalisado = WatsonPersonalityInsights.analisarPerfil(json);
+		String perfilAnalisado = WatsonPersonalityInsightsAPI.analisarPerfil(json);
 		
 		return retornaPersonalidade(perfilAnalisado);
 	}
 	
 	public static Personalidade retornaPersonalidade(String json) {
+		
+		Calendar cal = Calendar.getInstance();
+		System.out.println("START TIME " + cal.getTime());
+		
 		Personalidade personalidade = new Personalidade();
 		
 		try {
@@ -66,9 +71,13 @@ public class AnalisarPerfil {
 			}
 			
 			personalidade.setBigFive(bigFive);
+			
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		
+		Calendar cal2 = Calendar.getInstance();
+		System.out.println("END TIME " + cal2.getTime());
 		
 		return personalidade;
 	}

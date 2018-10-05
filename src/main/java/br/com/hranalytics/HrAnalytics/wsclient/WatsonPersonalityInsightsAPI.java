@@ -1,4 +1,4 @@
-package br.com.hranalytics.HrAnalytics.watsonapi;
+package br.com.hranalytics.HrAnalytics.wsclient;
 
 import com.ibm.watson.developer_cloud.personality_insights.v3.PersonalityInsights;
 import com.ibm.watson.developer_cloud.personality_insights.v3.model.Content;
@@ -6,7 +6,7 @@ import com.ibm.watson.developer_cloud.personality_insights.v3.model.Profile;
 import com.ibm.watson.developer_cloud.personality_insights.v3.model.ProfileOptions;
 import com.ibm.watson.developer_cloud.util.GsonSingleton;
 
-public class WatsonPersonalityInsights {
+public class WatsonPersonalityInsightsAPI {
 
 	private final static String user = "70ffc005-552a-4f25-a66b-fa08a401e14e";
 	private final static String senha = "Djszfe4kgKVk";
