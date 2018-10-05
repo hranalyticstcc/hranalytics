@@ -18,6 +18,7 @@ public class ReceitaWS {
 		Usuario usuario = restTemplate.getForObject(ENDERECO_RECEITA_WS + cnpj, Usuario.class);
 		
 		return usuario;
+		
 	}
 
 }
