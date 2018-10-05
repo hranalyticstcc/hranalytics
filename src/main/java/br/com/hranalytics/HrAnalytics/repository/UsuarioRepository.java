@@ -9,7 +9,7 @@ import br.com.hranalytics.HrAnalytics.model.Usuario;
 @Repository
 public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 	
-	@Query("select u from Usuario u where u.nome = ?1")
+	@Query("select u from Usuario u where u.usuario = ?1")
 	public Usuario buscarPorNome(String usuario);
 
 }

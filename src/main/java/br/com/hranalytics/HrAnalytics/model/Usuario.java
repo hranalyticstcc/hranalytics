@@ -2,45 +2,57 @@ package br.com.hranalytics.HrAnalytics.model;
 
 import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Usuario {
 	
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id 
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotEmpty
 	private String nome;
 	
+	@Column(unique=true) 
+	@NotEmpty
 	private String usuario;
 	
-	private String email;
+	@JsonIgnore 
+	@NotEmpty
+	private String senha;
 	
+	private String email;
+		
 	@Temporal(TemporalType.DATE)
 	private Calendar dataNascimento;
 	
-	@JsonIgnore
-	private String senha;
+	@NotEmpty
+	private boolean admin;
 	
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(Long id, String nome, String usuario, String email, Calendar dataNascimento, String senha) {
+	public Usuario(Long id, @NotEmpty String nome, @NotEmpty String usuario, @NotEmpty String senha, String email,
+			Calendar dataNascimento, @NotEmpty boolean admin) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.usuario = usuario;
+		this.senha = senha;
 		this.email = email;
 		this.dataNascimento = dataNascimento;
-		this.senha = senha;
+		this.admin = admin;
 	}
 
 	public Long getId() {
@@ -67,6 +79,14 @@ public class Usuario {
 		this.usuario = usuario;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -83,11 +103,12 @@ public class Usuario {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getSenha() {
-		return senha;
+	public boolean isAdmin() {
+		return admin;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
+	
 }
