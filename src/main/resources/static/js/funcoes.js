@@ -1,27 +1,3 @@
-function entrar()
-{
-    
-    var nome = document.getElementById('IDnomeUsuario').value;
-    var password = document.getElementById('IDsenhaUsuario').value;
-
-    
-    if (nome == 'Aline' & password == '123')
-    {
-        window.location="paginaInicial.html";
-    }
-    else
-    {
-        alert("Senha Inválida");
-    }
-}
-
-function cadastrar()
-{
-    window.location="cadastroUsuario.html";
-}
-
-
-
 /******************************* Cadastrar novo usuário ***************************************************/
 function formatarCpf(evt)
 {
@@ -266,7 +242,7 @@ function drawChart() {
         var moralidade = data.bigFive[3].filhos[3].porcentagem * 100;
         var simpaticidade = data.bigFive[3].filhos[4].porcentagem * 100;
         var confianca = data.bigFive[3].filhos[5].porcentagem * 100;
-        drawAgregabilidade(altruismo, cooperacao, modestidade, moralidade, simpaticidade, confianca);
+        drawAgradabilidade(altruismo, cooperacao, modestidade, moralidade, simpaticidade, confianca);
 
         var raiva = data.bigFive[4].filhos[0].porcentagem * 100;
         var ansiedade = data.bigFive[4].filhos[1].porcentagem * 100;
@@ -300,7 +276,7 @@ function drawSentimentos(aventureiro,interesses_Artisticos, emocao, imaginacao, 
         },
         2]);
     var options1 = {
-        title: "Sentimentos",
+        title: "Abertura à novas experiências",
         width: 550,
         height: 400,
         bar: { groupWidth: "95%" },
@@ -380,12 +356,12 @@ function drawExtroversao(proatividade, assertividade, alegria, procura_de_desafi
 
 }
 
-function drawAgregabilidade(altruismo, cooperacao, modestidade, moralidade, simpaticidade, confianca){
-    //agregabilidade
+function drawAgradabilidade(altruismo, cooperacao, modestidade, moralidade, simpaticidade, confianca){
+    //Agradabilidade
     var data4 = google.visualization.arrayToDataTable([
         ["Elemento", "Densidade", { role: "style" }],
         ["Altruismo", altruismo, "#yellow"],
-        ["Cooperçcao", cooperacao, "purple"],
+        ["Cooperação", cooperacao, "purple"],
         ["Modestidade", modestidade, "blue"],
         ["Moralidade", moralidade, "red"],
         ["Simpaticidade", simpaticidade, "orange"],
@@ -403,7 +379,7 @@ function drawAgregabilidade(altruismo, cooperacao, modestidade, moralidade, simp
         2]);
 
     var options4 = {
-        title: "Agregabilidade",
+        title: "Agradabilidade",
         width: 550,
         height: 400,
         bar: { groupWidth: "95%" },
@@ -421,8 +397,8 @@ function drawNeuroticismo(raiva, ansiedade, depressao, imoderacao, auto_concienc
         ["Raiva", raiva, "#yellow"],
         ["Ansiedade", ansiedade, "purple"],
         ["Depressão", depressao, "blue"],
-        ["Imoderacao", imoderacao, "red"],
-        ["Auto Conciência", auto_conciencia, "orange"],
+        ["Imoderação", imoderacao, "red"],
+        ["Autoconciência", auto_conciencia, "orange"],
         ["Vulnerabilidade", vulnerabilidade, "green"]
     ]);
 

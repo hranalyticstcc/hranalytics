@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	lang="pt-br">
+
+<head th:insert="fragmentos/header :: header">
+    <meta charset="utf-8">
+</head>
+
+<body data-spy="scroll" data-target=".navbar-desktop">
+
+    <!--Navbar-->
+	<div th:insert="fragmentos/navbar :: navbar"></div>
+	
+    <section class="joinus" id="CompararTwitter">
+        <div class="main_joinus_area m-y-3">
+            <div class="container">
+                <div class="row">
+                    <br>
+                    <br>
+                    <div class="col-md-8 col-md-offset-3 section-title">
+                        <h3>Comparar Perfil</h3>
+                        <p>Faça a pesquisa de dois perfis para compara-los.</p>
+                    </div>
+                </div>
+
+                <form name="compararTwitter" id="idCompararTwitter">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Perfil do Twitter:</label>
+                            <input type="text" id="IDcomparaTwitter" name="comparaTwitter" class="form-control" maxlength="20">
+                        </div>
+                 
+                        <div class="col-md-3"></div>
+                            
+                        <div class="col-md-3">
+                                <div class="row">
+                                        <label class="perfisCompara" id="twitter1"></label> 
+                                </div>
+                                
+                                <div class="row">
+                                        <label class="perfisCompara" id="twitter2"></label> 
+                                </div>
+                            </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-default" id="IDbuscarPerfil" name="IDbuscarPerfil" onclick="buscar_validarTwitter()"> Buscar Perfil </button>
+                        
+                            <button type="button" class="btn btn-default" id="idCompararPerfil" name="compararPerfil" onclick="carregaCompararPerfil()" disabled> Comparar Twitter </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--container-->
+            <hr/>
+            <!-- DashBoard -->
+            <div class="container">
+                <div class="dashboard" id="IDdashboard">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-3 section-title">
+                            <h4>Personalidades Big Five:</h4>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div id="comparaAbertura"><hr/></div>
+                    </div>
+
+                    <br><br><br>
+
+                    <div class="row">
+                        <div id="comparaConsciencia"></div>
+                    </div>
+
+                    <br><br><br>
+
+                    <div class="row">
+                        <div id="comparaExtroversao"></div>
+                    </div>
+
+                        <br><br><br>
+
+                    <div class="row">
+                        <div id="comparaAgradabilidade"></div>
+                    </div>
+
+                    <br><br><br>
+
+                    <div class="row">
+                        <div id="comparaNeuroticismo"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div th:insert="fragmentos/imports-js :: js"></div>
+    
+</body>
+
+</html>

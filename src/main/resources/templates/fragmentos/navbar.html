@@ -1,0 +1,79 @@
+<div th:fragment="navbar">
+
+	<!--Navbar-->
+    <div class='preloader'>
+        <div class='loaded'>&nbsp;</div>
+    </div>
+
+    <nav class="navbar navbar-fixed-top navbar-light bg-faded">
+        <!--Collapse button-->
+        <div class="container">
+            <a href="#" data-activates="mobile-menu" class="button-collapse right">
+                <i class="fa fa-bars black-text"></i>
+            </a>
+
+            <!--Content for large and medium screens-->
+            <div class="navbar-desktop">
+                <!--Navbar Brand-->
+                <a class="navbar-brand" th:href="@{/index}">
+                    <img src="img/logotipo2.png" alt="" />
+                </a>
+
+                <!--Links-->
+                <ul class="nav navbar-nav pull-right hidden-md-down text-uppercase" id="desktop-menu">
+
+                   <!--<li class="nav-item">
+                        <a class="nav-link page-scroll" href="paginaInicial.html">Página Principal
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" th:href="@{/dashboard}">Buscar Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#">Consultar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" th:href="@{/comparar}">Comparar Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#">Gerenciar Conta</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" th:href="@{/logout}">Sair</a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <!-- LINKS-->
+            <div class="navbar-mobile">
+
+                <ul class="side-nav" id="mobile-menu">
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#home">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashBoard.html">Buscar Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Consultar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="CompararPerfil.html">Comparar Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Gerenciar Conta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Index.html">Sair</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</div>

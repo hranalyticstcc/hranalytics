@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:insert="fragmentos/header :: header">
+    <meta charset="utf-8">
+</head>
+
+<body data-spy="scroll" data-target=".navbar-desktop">
+
+    <!--Navbar-->
+    <div th:insert="fragmentos/navbar :: navbar"></div>
+
+    <div th:insert="fragmentos/rodape :: footer" class="footer" id="contact">
+    </div>
+
+    <div th:insert="fragmentos/imports-js :: js"></div>
+
+</body>
+
+</html>
