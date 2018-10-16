@@ -8,7 +8,6 @@
 <body data-spy="scroll" data-target=".navbar-desktop">
 
     <!--Navbar-->
-
     <nav class="navbar navbar-fixed-top navbar-light bg-faded">
         <!--Collapse button-->
         <div class="container">
@@ -60,31 +59,71 @@
                     </div>
                 </div>
 
-                <form name="cadastro" id="cadastro">
+                <form name="cadastro" id="cadastro" th:object="${usuario}" th:action="@{/cadastro/salvar}" method="POST">
+                    
                     <div class="row">
                         <div class="col-md-8 section-title">
-                            <h4>1º Passo: pessoa física</h4>
+                            <h4>1º Passo: Dados da empresa</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="cnpj">CNPJ:</label>
+                            <input type="text" id="cnpj" name="cnpj" th:value="${usuario.cnpj}" th:field="*{cnpj}" class="form-control" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="situacao">Situação CNPJ:</label>
+                            <input type="text" id="situcao" name="situcao" th:value="${usuario.situacao}" class="form-control" readonly="readonly">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="nomeFantasia">Nome Fantasia:</label>
+                            <input type="text" id="nomeFantasia" name="nomeFantasia" th:value="${usuario.nome}" class="form-control" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="cep">CEP:</label>
+                            <input type="text" id="cep" name="cep" th:value="${usuario.cep}" class="form-control" readonly="readonly">
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label for="numero">Número:</label>
+                            <input type="text" id="numero" name="numero" th:value="${usuario.numero}" class="form-control" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <hr/>
+                    
+                    <div class="row">
+                        <div class="col-md-8 section-title">
+                            <h4>2º Passo: Dados do funcionário responsável</h4>
                         </div>
                     </div>
 
                     <div class="row">
 
                         <div class="col-md-6">
-                            <label>Nome*:</label>
-                            <input type="text" id="IDnomePessoaFisica" name="nomePessoaFisica" class="form-control" maxlength="100">
+                            <label for="nome">Nome*:</label>
+                            <input type="text" id="nome" name="nome" class="form-control" maxlength="100">
                         </div>
 
                         <div class="col-md-6">
-                            <label>E-mail*:</label>
-                            <input type="email" id="IDemailPessoaFisica" name="emailPessoaFisica" class="form-control" maxlength="100">
+                            <label for="email">E-mail*:</label>
+                            <input type="email" id="email" name="email" class="form-control" maxlength="100">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <label>CPF*:</label>
+                            <label for="cpf">CPF*:</label>
                             <div class="msgCampos" id="msgCpf"></div>
-                            <input type="text" id="IDcpfPessoaFisica" name="cpfPessoaFisica" class="form-control" onkeypress="this.value = formatarCpf(event)"
+                            <input type="text" id="cpf" name="cpf" class="form-control" onkeypress="this.value = formatarCpf(event)"
                                 maxlength="14" onpaste="return false;">
                         </div>
                         <div class="col-md-6">
@@ -104,56 +143,7 @@
 
                     <div class="row">
                         <div class="col-md-8 section-title">
-                            <h4>2º Passo: pessoa jurídica</h4>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>CNPJ*:</label>
-                            <input type="text" id="IDcnpj" class="form-control" maxlength="18" onkeypress="this.value = formatarCnpj(event)">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-5">
-                            <button type="button" class="btn btn-default" onclick="validarCnpj()">Validar CNPJ</button>
-                        </div>
-                    </div>
-
-                    <hr/>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Situação CNPJ:</label>
-                            <input type="text" id="IDsituacaoCnpj" name="situacaoCnpj" class="form-control">
-                            <!--readonly="readonly"-->
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Nome Fantasia:</label>
-                            <input type="text" id="IDnomeFantasia" name="nomeFantasia" class="form-control">
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="razaoSocial">Razão social:</label>
-                            <input type="text" id="razaoSocial" name="razaoSocial" class="form-control">
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>CEP:</label>
-                            <input type="text" id="IDcepPessoaJuridica" name="cepPessoaJuridica" class="form-control">
-                        </div>
-                    </div>
-
-                    <hr/>
-
-                    <div class="row">
-                        <div class="col-md-8 section-title">
-                            <h4>3º Passo: usuário</h4>
+                            <h4>3º Passo: Usuário e senha de acesso</h4>
                         </div>
                     </div>
 

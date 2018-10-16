@@ -28,7 +28,7 @@ public class ControllerAplication {
 	
 	@GetMapping("/cadastro")
 	public String cadastrar() {
-		return "/cadastro-usuario";
+		return "/cadastro-primeiro-passo";
 	}
 	
 	@GetMapping("/403")

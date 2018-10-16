@@ -20,7 +20,7 @@ public class PersonalidadeRest {
 		Personalidade personalidade = new Personalidade();
 		
 		try {
-			personalidade = AnalisarPerfil.analisar(perfil);
+			personalidade = AnalisarPerfil.analisarPersonalidade(perfil);
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}

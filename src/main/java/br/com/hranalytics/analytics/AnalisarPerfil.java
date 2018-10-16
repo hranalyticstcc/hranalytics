@@ -18,7 +18,7 @@ import twitter4j.TwitterException;
 
 public class AnalisarPerfil {
 
-	public static Personalidade analisar(String perfil) throws TwitterException {
+	public static Personalidade analisarPersonalidade(String perfil) throws TwitterException {
 		List<String> tweets = new ArrayList<String>();
 
 		TwitterAPI apiTwitter = new TwitterAPI();

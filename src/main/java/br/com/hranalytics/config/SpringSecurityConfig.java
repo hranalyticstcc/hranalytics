@@ -27,7 +27,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/", "/home", "/cadastro").permitAll()
+			.antMatchers("/", "/home", "/cadastro/**").permitAll()
 			.antMatchers("/css/**").permitAll()
 			.antMatchers("/js/**").permitAll()
 			.antMatchers("/font/**").permitAll()
@@ -50,14 +50,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 			.passwordEncoder(new BCryptPasswordEncoder());
 	}
 	
-//	@Autowired
-//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//		
-//		auth.inMemoryAuthentication()
-//			.withUser("user").password("{noop}password").roles("USER")
-//			.and()
-//			.withUser("admin").password("{noop}password").roles("ADMIN");
-//		
-//	}
+/*	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		
+		auth.inMemoryAuthentication()
+			.withUser("user").password("{noop}password").roles("USER")
+			.and()
+			.withUser("admin").password("{noop}password").roles("ADMIN");
+		
+	}*/
 
 }
