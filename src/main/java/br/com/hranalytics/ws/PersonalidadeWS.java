@@ -1,30 +1,28 @@
 package br.com.hranalytics.ws;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.hranalytics.analytics.AnalisarPerfil;
 import br.com.hranalytics.model.Personalidade;
-import twitter4j.TwitterException;
+import br.com.hranalytics.service.AnaliseDePersonalidadeService;
 
 @RestController
 @RequestMapping("/personalidade")
-public class PersonalidadeRest {
-	
-	@RequestMapping(value="/analisa/{perfil}", method = RequestMethod.GET)
+public class PersonalidadeWS {
+
+	@Autowired
+	private AnaliseDePersonalidadeService analise;
+
 	@ResponseBody
-	public Personalidade analisaPerfil(@PathVariable("perfil") String perfil) {
+	@GetMapping("/analisa/{perfil}")
+	public Personalidade analisaPersonalidade(@PathVariable String perfil) {
 		Personalidade personalidade = new Personalidade();
-		
-		try {
-			personalidade = AnalisarPerfil.analisarPersonalidade(perfil);
-		} catch (TwitterException e) {
-			e.printStackTrace();
-		}
-		
+		personalidade = analise.analisarPersonalidade(perfil);
+
 		return personalidade;
 	}
 

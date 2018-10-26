@@ -1,10 +1,10 @@
 package br.com.hranalytics.model;
 
-public class Content {
+public class Conteudo {
 	
 	private String content;
 	
-	public Content(String content) {
+	public Conteudo(String content) {
 		super();
 		this.content = content;
 	}

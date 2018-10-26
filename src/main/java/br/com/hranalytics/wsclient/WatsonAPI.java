@@ -1,18 +1,27 @@
 package br.com.hranalytics.wsclient;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
 import com.ibm.watson.developer_cloud.personality_insights.v3.PersonalityInsights;
 import com.ibm.watson.developer_cloud.personality_insights.v3.model.Content;
 import com.ibm.watson.developer_cloud.personality_insights.v3.model.Profile;
 import com.ibm.watson.developer_cloud.personality_insights.v3.model.ProfileOptions;
 import com.ibm.watson.developer_cloud.util.GsonSingleton;
 
-public class WatsonPersonalityInsightsAPI {
+@Service
+public class WatsonAPI {
 
-	private final static String user = "70ffc005-552a-4f25-a66b-fa08a401e14e";
-	private final static String senha = "Djszfe4kgKVk";
-	private final static String version = "2017-10-13";
+	@Value("${ibm.cloud.usuario}")
+	private String user;
+	
+	@Value("${ibm.cloud.senha}")
+	private String senha;
+	
+	@Value("${ibm.cloud.versao}")
+	private String version;
 
-	public static String analisarPerfil(String json) {
+	public String analisarPerfil(String json) {
 		PersonalityInsights service = new PersonalityInsights(version);
 		service.setUsernameAndPassword(user, senha);
 		Content content = GsonSingleton.getGson().fromJson(json, Content.class);

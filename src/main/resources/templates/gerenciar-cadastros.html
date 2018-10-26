@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:insert="fragmentos/header :: header">
+    <meta charset="utf-8">
+</head>
+
+<body data-spy="scroll" data-target=".navbar-desktop">
+
+    <!--Navbar-->
+    <div th:insert="fragmentos/navbar :: navbar"></div>
+    
+    <h1>TESTE</h1>
+    <br/>
+     <br/>
+      <br/>
+       <br/>
+       <br/>
+       
+
+    <table>
+    	<thead>
+    		<tr>
+    			<th>Nome</th>
+    			<th>CPF</th>
+    			<th>Usuário</th>
+    			<th>Nome Fantasia</th>
+    			<th>CNPJ</th>
+    			<th>Situação</th>
+    			<th></th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<tr th:each="usuario : ${usuarios}">
+    			<td th:text="${usuario.nomePessoaFisica}"></td>
+    			<td th:text="${usuario.cpf}"></td>
+    			<td th:text="${usuario.nomeUsuario}"></td>
+    			<td th:text="${usuario.nome}"></td>
+    			<td th:text="${usuario.cnpj}"></td>
+    			<td th:text="${usuario.situacao}"></td>
+    			<td>
+    				<div class="btn-group pull-right">
+						<a class="btn btn-sm btn-primary" th:href="@{'/admin/cadastro/ativar/' + ${usuario.id}}">Ativar Cadastro</a>
+					</div>
+    			</td>
+    		</tr>
+    	</tbody>
+    </table>
+
+    <div th:insert="fragmentos/imports-js :: js"></div>
+
+</body>
+
+</html>

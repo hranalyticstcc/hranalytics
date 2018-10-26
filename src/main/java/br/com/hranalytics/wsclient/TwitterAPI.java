@@ -3,6 +3,9 @@ package br.com.hranalytics.wsclient;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
 import twitter4j.Paging;
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -10,22 +13,22 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
+@Service
 public class TwitterAPI {
-
+	
+	@Value("${twitter4j.consumer.key}")
 	private String OAuthConsumerKey;
+	
+	@Value("${twitter4j.consumer.secret}")
 	private String OAuthConsumerSecret;
+	
+	@Value("${twitter4j.access.token}")
 	private String OAuthAccessToken;
+	
+	@Value("${twitter4j.access.token.secret}")
 	private String OAuthAccessTokenSecret;
 
-	public TwitterAPI() {
-		super();
-		OAuthConsumerKey = "Xu8kVMGOrJa4tSb4wriTjiqZM";
-		OAuthConsumerSecret = "JiYGeoQOqffvSrv46Dp5DSSFHx5nRbQXZMgELSE47yRfCBN5ng";
-		OAuthAccessToken = "986953513090547713-3vJz2PiktjcOHpbmcK1erYmCIAhE3Pr";
-		OAuthAccessTokenSecret = "fbzhhteBXpOIqevj8ZpbVZzGoNtNFkRwMaM9xmT8d2tng";
-	}
-
-	public List<String> pegaLinhaDoTempo(String usuarioAnalisado) throws TwitterException {
+	public List<String> pegaLinhaDoTempo(String usuarioAnalisado) {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		
 		configuraChavesTWitter(cb);
@@ -35,7 +38,14 @@ public class TwitterAPI {
 
 		// Parametros: Paging(Número de Páginas, Número por páginas)
 		Paging paging = new Paging(3, 300);
-		List<Status> statuses = twitter.getUserTimeline(usuarioAnalisado, paging);
+		
+		List<Status> statuses = null;
+		try {
+			statuses = twitter.getUserTimeline(usuarioAnalisado, paging);
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
+		
 		List<String> tweets = new ArrayList<String>();
 
 		for (Status status : statuses) {

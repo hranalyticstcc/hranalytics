@@ -25,8 +25,8 @@
 				<!--Links-->
 				<ul class="nav navbar-nav pull-right hidden-md-down text-uppercase"
 					id="desktop-menu">
-					<li class="nav-item"><a class="nav-link" th:href="@{/cadastro}">
-						Retornar
+					<li class="nav-item"><a class="nav-link" th:href="@{/}">
+						Pagina Inicial
 						<span class="sr-only">(current)</span>
 					</a></li>
 				</ul>
@@ -40,9 +40,8 @@
 				<div class="row">
 					<br> <br>
 					<div class="col-md-8 col-md-offset-3 section-title">
-						<h3>Retorno da ReceitaWS:</h3>
-						 <p th:text="${mensagem}"></p>
-						 <small>Caso o status do CNPJ não estiver ATIVO não será possível completar o seu cadastro. Em caso de problemas técnicos contate o administrador email@email.com</small>
+						<h3>O seu cadastro está sendo analisado.</h3>
+						<p>O seu usuario está criado. Porém você não tem permissão para acesar as principais funcionalidades do Hr Analytics. Vamos retornar através do e-mail informado. Obrigado.</p>
 					</div>
 				</div>
 			</div>
@@ -55,5 +54,3 @@
 </body>
 
 </html>
-
-

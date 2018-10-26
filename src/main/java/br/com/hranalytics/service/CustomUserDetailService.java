@@ -30,14 +30,24 @@ public class CustomUserDetailService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) 
 			throws UsernameNotFoundException {
 		
-		Usuario usuario = Optional.ofNullable(usuarioRepository.buscarPorNome(username))
+		Usuario usuario = Optional.ofNullable(usuarioRepository.findByNomeUsuario(username))
 				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
 		
-		List<GrantedAuthority> authorityListAdmin = AuthorityUtils.createAuthorityList("ROLE_ADMIN");
+		List<GrantedAuthority> authorityListAdmin = AuthorityUtils.createAuthorityList("ROLE_ADMIN","ROLE_USER","ROLE_USER_PEDING");
 		List<GrantedAuthority> authorityListUser = AuthorityUtils.createAuthorityList("ROLE_USER");
+		List<GrantedAuthority> authorityListUserPending = AuthorityUtils.createAuthorityList("ROLE_USER_PEDING");
 		
-		return new User(usuario.getUsuario(), usuario.getSenha(), 
-				usuario.getAdmin() == RoleEnum.ADMIN ? authorityListAdmin : authorityListUser);
+		List<GrantedAuthority> authorityList = null;
+		
+		if(usuario.getRole() == RoleEnum.ADMIN) {
+			authorityList = authorityListAdmin;
+		}else if(usuario.getRole() == RoleEnum.USER) {
+			authorityList = authorityListUser;
+		}else {
+			authorityList = authorityListUserPending;
+		}
+		
+		return new User(usuario.getNomeUsuario(), usuario.getSenha(), authorityList);
 	}
 
 }

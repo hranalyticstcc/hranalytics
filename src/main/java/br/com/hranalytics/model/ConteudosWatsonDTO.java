@@ -5,22 +5,22 @@ import java.util.List;
 
 public class ConteudosWatsonDTO {
 	
-	private List<Content> contentItems;
+	private List<Conteudo> contentItems;
 
 	public ConteudosWatsonDTO() {
 		super();
 		contentItems = new ArrayList<>();
 	}
 	
-	public void addContentItems(Content c) {
+	public void addContentItems(Conteudo c) {
 		this.contentItems.add(c);
 	}
 
-	public List<Content> getContentItems() {
+	public List<Conteudo> getContentItems() {
 		return contentItems;
 	}
 
-	public void setContentItems(List<Content> contentItems) {
+	public void setContentItems(List<Conteudo> contentItems) {
 		this.contentItems = contentItems;
 	}
 

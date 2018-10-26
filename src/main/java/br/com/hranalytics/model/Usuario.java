@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,9 +16,9 @@ public class Usuario {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty
 	private String nome;
 	
+	@Size(min=3, max=10)
 	private String cpf;
 	
 	private String telefone;
@@ -27,22 +27,23 @@ public class Usuario {
 	
 	private String cnpj;
 	
-	private String nomeFantasia;
+	private String situacao;
+	
+	private String nomePessoaFisica;
 	
 	private String cep;
 	
+	private String numero;
+	
 	@Column(unique=true) 
-	@NotEmpty
-	private String usuario;
+	private String nomeUsuario;
 	
 	@JsonIgnore 
-	@NotEmpty
 	private String senha;
 	
 	private String email;
 	
-	@NotEmpty
-	private RoleEnum admin;
+	private RoleEnum role;
 	
 	public Usuario() {
 		super();
@@ -96,12 +97,12 @@ public class Usuario {
 		this.cnpj = cnpj;
 	}
 
-	public String getNomeFantasia() {
-		return nomeFantasia;
+	public String getNomePessoaFisica() {
+		return nomePessoaFisica;
 	}
 
-	public void setNomeFantasia(String nomeFantasia) {
-		this.nomeFantasia = nomeFantasia;
+	public void setNomePessoaFisica(String nomePessoaFisica) {
+		this.nomePessoaFisica = nomePessoaFisica;
 	}
 
 	public String getCep() {
@@ -112,12 +113,12 @@ public class Usuario {
 		this.cep = cep;
 	}
 
-	public String getUsuario() {
-		return usuario;
+	public String getNomeUsuario() {
+		return nomeUsuario;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
 	}
 
 	public String getSenha() {
@@ -136,13 +137,38 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public RoleEnum getAdmin() {
-		return admin;
+	public String getSituacao() {
+		return situacao;
 	}
 
-	public void setAdmin(RoleEnum admin) {
-		this.admin = admin;
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public RoleEnum getRole() {
+		return role;
+	}
+
+	public void setRole(RoleEnum role) {
+		this.role = role;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", telefone=" + telefone + ", celular="
+				+ celular + ", cnpj=" + cnpj + ", situacaoCNPJ=" + situacao + ", nomeFantasia=" + nomePessoaFisica
+				+ ", cep=" + cep + ", numero=" + numero + ", usuario=" + nomeUsuario + ", senha=" + senha + ", email="
+				+ email + ", role=" + role + "]";
 	}
 	
 	
+		
 }
