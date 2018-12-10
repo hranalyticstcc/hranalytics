@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragmentos/header :: header">
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div th:insert="fragmentos/navbar :: navbar"></div>
+
+    <section class="joinus" id="secaoBuscarTwitter">
+        <div class="main_joinus_area m-y-3">
+            <div class="container">
+                <div class="row">
+                    <br/>
+                    <br/>
+                    <div class="col-md-7 col-md-offset-3 section-title">
+                        <h3>Gerenciar Cadastro</h3>
+                    </div>
+                    <a th:href="@{/cadastro/telaRedefinir}">
+                        <small>Redefinir minha senha</small>
+                    </a>
+                    <br/>
+                    <a onclick="confirmarExclusao()">
+                        <small>Excluir minha conta</small>
+                    </a>
+                    <form id="exclusao" action="/cadastro/excluir"></form>
+                    <br/>
+                </div>
+                
+                <div th:if="${pagamento == null}">
+                	<!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+                	<form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post">
+						<!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
+						<input type="hidden" name="code" value="0B753266F2F241D3340B3FB9683B0F2F" />
+						<input type="hidden" name="iot" value="button" />
+						<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/209x48-comprar-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+					</form>
+					<!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
+                </div>
+                
+				Pagamento do Mês Realizado: <span th:text="${pagamento != nulll ? 'Sim' : 'Nao'}">Sim</span>
+				<br/>
+				<br/>
+				<br/>
+                <form name="usuario" id="usuario" th:action="@{/cadastro/gerenciarCadastro}" th:object="${usuario}" method="POST">
+                
+                	<div th:if="${erros != null}">
+                		<div class="alert alert-danger"
+                			 th:each="erro : ${erros}"
+                			 th:text="${erro.getDefaultMessage()}">
+                		</div>
+                	</div>
+                	
+                    <div class="row">
+
+                        <div class="col-md-6">
+                        	<input type="hidden" name="id" th:value="${usuario.id}" th:field="*{id}"/>
+                        
+                            <label for="nome">Nome:</label>
+                            <input type="text" id="nome" name="nome" th:value="${usuario.nomePessoaFisica}" th:field="*{nomePessoaFisica}" class="form-control" maxlength="50" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cpf">CPF:</label>
+                            <input type="text" id="cpf" name="cpf" th:value="${usuario.cpf}" th:field="*{cpf}" class="form-control" maxlength="50" disabled />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="email">E-mail:</label>
+                            <input type="text" id="email" name="email" th:value="${usuario.email}" th:field="*{email}" class="form-control" maxlength="50" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="telefone">Telefone:</label>
+                            <input type="text" id="nome" name="nome" th:value="${usuario.telefone}" th:field="*{telefone}" class="form-control" maxlength="50" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="celular">Celular:</label>
+                            <input type="text" id="celular" name="celular" maxlength="10" th:value="${usuario.celular}" th:field="*{celular}" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="cnpj">CNPJ:</label>
+                            <input type="text" id="cnpj" name="cnpj" maxlength="10" th:value="${usuario.cnpj}" th:field="*{cnpj}" class="form-control" disabled />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="situacao">Situação do CNPJ:</label>
+                            <input type="text" id="situacao" name="situacao" maxlength="10" th:value="${usuario.situacao}" th:field="*{situacao}" class="form-control" disabled
+                            />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fantasia">Nome Fantasia:</label>
+                            <input type="text" id="fantasia" name="fantasia" maxlength="10" th:value="${usuario.nome}" th:field="*{nome}" class="form-control" disabled
+                            />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="dataNascimento">Logradouro:</label>
+                            <input type="text" id="logradouro" name="logradouro" maxlength="10" th:value="${usuario.logradouro}" class="form-control"
+                            />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="dataNascimento">Número:</label>
+                            <input type="text" id="numero" name="numero" maxlength="10" th:value="${usuario.numero}" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cep">CEP:</label>
+                            <input type="text" id="cep" name="cep" maxlength="10" th:value="${usuario.cep}" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-default">
+                                    Atualizar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div th:insert="fragmentos/imports-js :: js"></div>
+
+</body>
+
+</html>

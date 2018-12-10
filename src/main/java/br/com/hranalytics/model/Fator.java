@@ -1,12 +1,17 @@
 package br.com.hranalytics.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
-public class DimensaoFilho {
+public class Fator {
 	
 	@Id
 	@GeneratedValue
@@ -16,17 +21,23 @@ public class DimensaoFilho {
 	
 	private double porcentagem;
 	
-	@ManyToOne
-	private Dimensao dimensao;
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+	@JoinColumn(name = "fator")
+	private List<Dimensao> dimensoes;
 	
-	public DimensaoFilho() {
+	@ManyToOne
+	@JoinColumn(insertable=false,updatable=false,name="fatores")
+	private Personalidade personalidade;
+	
+	public Fator() {
 		super();
 	}
-	public DimensaoFilho(Long id, String nome, double porcentagem) {
+	public Fator(Long id, String nome, double porcentagem, List<Dimensao> filhos) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.porcentagem = porcentagem;
+		this.dimensoes = filhos;
 	}
 	public Long getId() {
 		return id;
@@ -46,8 +57,14 @@ public class DimensaoFilho {
 	public void setPorcentagem(double porcentagem) {
 		this.porcentagem = porcentagem;
 	}
+	public List<Dimensao> getDimensoes() {
+		return dimensoes;
+	}
+	public void setDimensoes(List<Dimensao> dimensoes) {
+		this.dimensoes = dimensoes;
+	}
 	@Override
 	public String toString() {
-		return "DimensaoFilho [id=" + id + ", nome=" + nome + ", porcentagem=" + porcentagem + "]";
+		return "Dimensao [id=" + id + ", nome=" + nome + ", porcentagem=" + porcentagem + ", filhos=" + dimensoes + "]";
 	}
 }

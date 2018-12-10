@@ -1,3 +1,51 @@
+var perfil1 = null;
+var perfil2 = null;
+
+function selecionarPerfilParaComparar(perfil){
+	
+	if(!perfil1){
+		var nome = $("#nome"+perfil).html();
+		perfil1 = perfil;
+		$("#perfil1").val(nome);
+		alert("Perfil 1 selecionado");
+		return;
+	}
+	
+	if(!perfil2){
+		var nome = $("#nome"+perfil).html();
+		perfil2 = perfil;
+		
+		if(perfil1 == perfil2){
+			alert("Selecione um perfil diferente.");
+			perfil2 = null;
+			return;
+		}
+		
+		$("#perfil2").val(nome);
+		$("#btnComparar").prop('disabled', false);
+		alert("Perfil 2 selecionado");
+		return;
+	}
+	
+	alert("Você não pode selecionar mais que dois perfis");
+}
+
+function limparPerfilParaComparar(){
+	perfil1 = "";
+	perfil2 = "";
+	$("#perfil1").val("");
+	$("#perfil2").val("");
+	$("#btnComparar").prop('disabled', true);
+}
+
+function comparar(){
+	$("#id1").val(perfil1);
+	$("#id2").val(perfil2);
+	
+	document.getElementById('comparacao').submit();
+}
+
+
 /******************************* Cadastrar novo usuário ***************************************************/
 function formatarCpf(evt)
 {
@@ -197,7 +245,6 @@ function validaUsuarioTweeter(usuarioTweeter)
     }
 }
 
-
 function carregarDashBoard() {
     //document.getElementById('IDdashboard').style.display = 'none';
     document.getElementById('IDdashboard').style.color = 'black';
@@ -212,44 +259,44 @@ function drawChart() {
 
     $.get("/personalidade/analisa/" + perfil, function (data) {
 
-        var aventureiro = data.bigFive[0].filhos[0].porcentagem * 100;
-        var interesses_Artisticos = data.bigFive[0].filhos[1].porcentagem * 100;
-        var emocao = data.bigFive[0].filhos[2].porcentagem * 100;
-        var imaginacao = data.bigFive[0].filhos[3].porcentagem * 100;
-        var intelecto = data.bigFive[0].filhos[4].porcentagem * 100;
-        var liberalismo = data.bigFive[0].filhos[5].porcentagem * 100;
+        var aventureiro = data.fatores[0].dimensoes[0].porcentagem * 100;
+        var interesses_Artisticos = data.fatores[0].dimensoes[1].porcentagem * 100;
+        var emocao = data.fatores[0].dimensoes[2].porcentagem * 100;
+        var imaginacao = data.fatores[0].dimensoes[3].porcentagem * 100;
+        var intelecto = data.fatores[0].dimensoes[4].porcentagem * 100;
+        var liberalismo = data.fatores[0].dimensoes[5].porcentagem * 100;
         drawSentimentos(aventureiro, interesses_Artisticos, emocao, imaginacao, intelecto, liberalismo);
 
-        var esforcado = data.bigFive[1].filhos[0].porcentagem * 100;
-        var cuidadoso = data.bigFive[1].filhos[1].porcentagem * 100;
-        var obediencia = data.bigFive[1].filhos[2].porcentagem * 100;
-        var comportamento = data.bigFive[1].filhos[3].porcentagem * 100;
-        var disciplina = data.bigFive[1].filhos[4].porcentagem * 100;
-        var eficacia = data.bigFive[1].filhos[5].porcentagem * 100;
+        var esforcado = data.fatores[1].dimensoes[0].porcentagem * 100;
+        var cuidadoso = data.fatores[1].dimensoes[1].porcentagem * 100;
+        var obediencia = data.fatores[1].dimensoes[2].porcentagem * 100;
+        var comportamento = data.fatores[1].dimensoes[3].porcentagem * 100;
+        var disciplina = data.fatores[1].dimensoes[4].porcentagem * 100;
+        var eficacia = data.fatores[1].dimensoes[5].porcentagem * 100;
         drawConsciencia(esforcado, cuidadoso, obediencia, comportamento, disciplina, eficacia);
 
-        var proatividade = data.bigFive[2].filhos[0].porcentagem * 100;
-        var assertividade = data.bigFive[2].filhos[1].porcentagem * 100;
-        var alegria = data.bigFive[2].filhos[2].porcentagem * 100;
-        var procura_de_desafios = data.bigFive[2].filhos[3].porcentagem * 100;
-        var simpatia = data.bigFive[2].filhos[4].porcentagem * 100;
-        var social = data.bigFive[2].filhos[5].porcentagem * 100;
+        var proatividade = data.fatores[2].dimensoes[0].porcentagem * 100;
+        var assertividade = data.fatores[2].dimensoes[1].porcentagem * 100;
+        var alegria = data.fatores[2].dimensoes[2].porcentagem * 100;
+        var procura_de_desafios = data.fatores[2].dimensoes[3].porcentagem * 100;
+        var simpatia = data.fatores[2].dimensoes[4].porcentagem * 100;
+        var social = data.fatores[2].dimensoes[5].porcentagem * 100;
         drawExtroversao(proatividade, assertividade, alegria, procura_de_desafios, simpatia, social);
 
-        var altruismo = data.bigFive[3].filhos[0].porcentagem * 100;
-        var cooperacao = data.bigFive[3].filhos[1].porcentagem * 100;
-        var modestidade = data.bigFive[3].filhos[2].porcentagem * 100;
-        var moralidade = data.bigFive[3].filhos[3].porcentagem * 100;
-        var simpaticidade = data.bigFive[3].filhos[4].porcentagem * 100;
-        var confianca = data.bigFive[3].filhos[5].porcentagem * 100;
+        var altruismo = data.fatores[3].dimensoes[0].porcentagem * 100;
+        var cooperacao = data.fatores[3].dimensoes[1].porcentagem * 100;
+        var modestidade = data.fatores[3].dimensoes[2].porcentagem * 100;
+        var moralidade = data.fatores[3].dimensoes[3].porcentagem * 100;
+        var simpaticidade = data.fatores[3].dimensoes[4].porcentagem * 100;
+        var confianca = data.fatores[3].dimensoes[5].porcentagem * 100;
         drawAgradabilidade(altruismo, cooperacao, modestidade, moralidade, simpaticidade, confianca);
 
-        var raiva = data.bigFive[4].filhos[0].porcentagem * 100;
-        var ansiedade = data.bigFive[4].filhos[1].porcentagem * 100;
-        var depressao = data.bigFive[4].filhos[2].porcentagem * 100;
-        var imoderacao = data.bigFive[4].filhos[3].porcentagem * 100;
-        var auto_conciencia = data.bigFive[4].filhos[4].porcentagem * 100;
-        var vulnerabilidade = data.bigFive[4].filhos[5].porcentagem * 100;
+        var raiva = data.fatores[4].dimensoes[0].porcentagem * 100;
+        var ansiedade = data.fatores[4].dimensoes[1].porcentagem * 100;
+        var depressao = data.fatores[4].dimensoes[2].porcentagem * 100;
+        var imoderacao = data.fatores[4].dimensoes[3].porcentagem * 100;
+        var auto_conciencia = data.fatores[4].dimensoes[4].porcentagem * 100;
+        var vulnerabilidade = data.fatores[4].dimensoes[5].porcentagem * 100;
         drawNeuroticismo(raiva, ansiedade, depressao, imoderacao, auto_conciencia, vulnerabilidade);
     })
 }
@@ -423,4 +470,50 @@ function drawNeuroticismo(raiva, ansiedade, depressao, imoderacao, auto_concienc
     var chart5 = new google.visualization.ColumnChart(document.getElementById("columnchart_values5"));
     chart5.draw(view5, options5);
 
+}
+
+function confirmaSenha(){
+	var senha = $("#senha").val();
+	var confirmar = $("#confirma").val();
+	
+	if(senha == confirmar){
+		document.getElementById('cadastro').submit();
+	}else{
+		alert("Sua senha não confere");
+	}
+}
+
+function confirmaNovaSenha(){
+	var senha = $("#senha").val();
+	var confirmar = $("#confirma").val();
+	
+	if(senha == confirmar){
+		document.getElementById('redefinir').submit();
+	}else{
+		alert("Sua senha não confere");
+	}
+}
+
+function validaCadastroCandidato(){
+	var q1 = $("#questao1").val();
+	var q2 = $("#questao2").val();
+	var q3 = $("#questao3").val();
+	
+	if(!q1 || !q2 || !q3){
+		alert("Preencha as três questões.");
+	}else{
+		if(document.getElementById('termos').checked) {
+			document.getElementById('candidato').submit();
+		} else {
+		    alert("Você precisa aceitar os termos para realizar o cadastro.");
+		}
+	}
+}
+
+function confirmarExclusao(){
+	if (confirm('Você tem certeza que deseja excluir a sua conta?')) {
+		document.getElementById('exclusao').submit();
+	} else {
+	    return;
+	}
 }

@@ -16,37 +16,25 @@
             <div class="navbar-desktop">
                 <!--Navbar Brand-->
                 <a class="navbar-brand" th:href="@{/index}">
-                    <img src="img/logotipo2.png" alt="" />
+                    <img src="/img/logotipo2.png" alt="" />
                 </a>
 
                 <!--Links-->
                 <ul class="nav navbar-nav pull-right hidden-md-down text-uppercase" id="desktop-menu">
 
-                   <!--<li class="nav-item">
-                        <a class="nav-link page-scroll" href="paginaInicial.html">Página Principal
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li> -->
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" th:href="@{/dashboard}">Buscar Perfil</a>
+                        <a class="nav-link page-scroll" th:href="@{/user/dashboard}">Analisar Perfil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#">Consultar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" th:href="@{/comparar}">Comparar Perfil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#">Gerenciar Conta</a>
+                        <a class="nav-link page-scroll" th:href="@{/cadastro/gerenciamento}">Gerenciar Conta</a>
                     </li>
                    	<li class="nav-item">
-                        <a class="nav-link page-scroll" th:href="@{/admin}">Area de Administrador</a>
+                        <a class="nav-link page-scroll" th:href="@{/admin/cadastro/pendentes}">Area de Administrador</a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link page-scroll" th:href="@{/logout}">Sair</a>
                     </li>
-
                 </ul>
             </div>
 
@@ -60,19 +48,17 @@
                         </a>
                     </li> -->
                     <li class="nav-item">
-                        <a class="nav-link" href="dashBoard.html">Buscar Perfil</a>
+                        <a class="nav-link page-scroll" th:href="@{/user/dashboard}">Analisar Perfil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Consultar</a>
+                        <a class="nav-link page-scroll" th:href="@{/user/gerenciamentoContaUsuario}">Gerenciar Conta</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="CompararPerfil.html">Comparar Perfil</a>
+                   	<li class="nav-item">
+                        <a class="nav-link page-scroll" th:href="@{/admin}">Area de Administrador</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Gerenciar Conta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Index.html">Sair</a>
+                        <a class="nav-link page-scroll" th:href="@{/logout}">Sair</a>
                     </li>
                 </ul>
             </div>

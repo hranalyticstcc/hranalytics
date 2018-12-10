@@ -34,7 +34,8 @@ public class AdminService {
 
 		usuarioRepo.save(usuario);
 		
-		email.enviarHtml(usuario.getEmail(), "HR Analytics", email.constroiConteudo());
+		email.enviarHtml(usuario.getEmail(), "HR Analytics",
+				email.constroiEmailConfirmacaoCadastroUsuario());
 
 		RedirectView rv = new RedirectView("/admin/cadastro/pendentes");
 		return rv;

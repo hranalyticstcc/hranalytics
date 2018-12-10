@@ -16,12 +16,7 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService service;
-	
-	@GetMapping
-	public String index() {
-		return "admin-index";
-	}
-	
+		
 	@GetMapping("/cadastro/pendentes")
 	public ModelAndView visualizarCadastrosPendentes() {
 		return service.consultarTodosUsuarios();

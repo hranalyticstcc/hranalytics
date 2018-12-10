@@ -2,9 +2,12 @@ package br.com.hranalytics.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -15,20 +18,15 @@ public class Personalidade {
 	@GeneratedValue
 	private Long id;
 	
-	@OneToMany
-	private List<Dimensao> bigFive;
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
+	@JoinColumn(name = "personalidade")
+	private List<Fator> fatores;
 	
-	@OneToOne
+	@OneToOne(mappedBy="personalidade")
 	private Candidato candidato;
 	
 	public Personalidade() {
 		super();
-	}
-	public Personalidade(Long id, List<Dimensao> bigFive, Candidato candidato) {
-		super();
-		this.id = id;
-		this.bigFive = bigFive;
-		this.candidato = candidato;
 	}
 	public Long getId() {
 		return id;
@@ -36,20 +34,14 @@ public class Personalidade {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<Dimensao> getBigFive() {
-		return bigFive;
+	public List<Fator> getFatores() {
+		return fatores;
 	}
-	public void setBigFive(List<Dimensao> bigFive) {
-		this.bigFive = bigFive;
-	}
-	public Candidato getCandidato() {
-		return candidato;
-	}
-	public void setCandidato(Candidato candidato) {
-		this.candidato = candidato;
+	public void setFatores(List<Fator> fatores) {
+		this.fatores = fatores;
 	}
 	@Override
 	public String toString() {
-		return "Personalidade [id=" + id + ", bigFive=" + bigFive + ", candidato=" + candidato + "]";
+		return "Personalidade [id=" + id + ", bigFive=" + fatores + ", candidato=" + candidato + "]";
 	}
 }

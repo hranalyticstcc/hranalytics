@@ -1,11 +1,15 @@
 package br.com.hranalytics.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Size;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,7 +22,7 @@ public class Usuario {
 	
 	private String nome;
 	
-	@Size(min=3, max=10)
+	@NotEmpty(message = "Preencha o campo obrigatório: CPF")
 	private String cpf;
 	
 	private String telefone;
@@ -27,28 +31,41 @@ public class Usuario {
 	
 	private String cnpj;
 	
+	@Column(name = "situacao_cnpj")
 	private String situacao;
 	
+	@NotEmpty(message = "Preencha o campo obrigatório: Nome")
 	private String nomePessoaFisica;
+	
+	private String logradouro;
 	
 	private String cep;
 	
 	private String numero;
 	
+	@NotEmpty(message = "Preencha o campo obrigatório: Usuário")
 	@Column(unique=true) 
 	private String nomeUsuario;
 	
+	@NotEmpty(message = "Preencha o campo obrigatório: Senha")
 	@JsonIgnore 
 	private String senha;
 	
+	@NotEmpty(message = "Preencha o campo obrigatório: E-mail")
 	private String email;
 	
 	private RoleEnum role;
 	
+	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL, orphanRemoval = true)
+	private List<Candidato> candidatos;
+	
+	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL, orphanRemoval = false)
+	private List<Pagamento> pagamentos;
+	
 	public Usuario() {
 		super();
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -97,6 +114,14 @@ public class Usuario {
 		this.cnpj = cnpj;
 	}
 
+	public String getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
+
 	public String getNomePessoaFisica() {
 		return nomePessoaFisica;
 	}
@@ -105,12 +130,28 @@ public class Usuario {
 		this.nomePessoaFisica = nomePessoaFisica;
 	}
 
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
 	public String getCep() {
 		return cep;
 	}
 
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 
 	public String getNomeUsuario() {
@@ -137,22 +178,6 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public String getSituacao() {
-		return situacao;
-	}
-
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
 	public RoleEnum getRole() {
 		return role;
 	}
@@ -161,14 +186,32 @@ public class Usuario {
 		this.role = role;
 	}
 
+	public List<Candidato> getCandidatos() {
+		return candidatos;
+	}
+
+	public void setCandidatos(List<Candidato> candidatos) {
+		this.candidatos = candidatos;
+	}
+	
+	public void addCandidato(Candidato candidato) {
+		this.candidatos.add(candidato);
+	}
+
+	public List<Pagamento> getPagamentos() {
+		return pagamentos;
+	}
+
+	public void setPagamentos(List<Pagamento> pagamentos) {
+		this.pagamentos = pagamentos;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", telefone=" + telefone + ", celular="
-				+ celular + ", cnpj=" + cnpj + ", situacaoCNPJ=" + situacao + ", nomeFantasia=" + nomePessoaFisica
-				+ ", cep=" + cep + ", numero=" + numero + ", usuario=" + nomeUsuario + ", senha=" + senha + ", email="
-				+ email + ", role=" + role + "]";
+				+ celular + ", cnpj=" + cnpj + ", situacao=" + situacao + ", nomePessoaFisica=" + nomePessoaFisica
+				+ ", logradouro=" + logradouro + ", cep=" + cep + ", numero=" + numero + ", nomeUsuario=" + nomeUsuario
+				+ ", senha=" + senha + ", email=" + email + ", role=" + role + ", candidatos=" + candidatos
+				+ ", pagamentos=" + pagamentos + "]";
 	}
-	
-	
-		
 }

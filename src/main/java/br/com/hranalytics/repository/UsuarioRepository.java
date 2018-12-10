@@ -12,5 +12,7 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 	public Usuario findByNomeUsuario(String nomeUsuario);
 	
 	public Iterable<Usuario> findAllByRole(RoleEnum role);
+	
+	Usuario findByEmail(String email);
 
 }

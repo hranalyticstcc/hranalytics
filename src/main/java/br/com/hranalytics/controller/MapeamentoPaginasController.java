@@ -56,11 +56,6 @@ public class MapeamentoPaginasController {
 		return "/user";
 	}
 
-	@GetMapping("/dashboard")
-	public String dashboard() {
-		return "/dash";
-	}
-
 	@GetMapping("/comparar")
 	public String compararPerfil() {
 		return "/comparar-perfil";

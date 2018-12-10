@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragmentos/header :: header">
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div th:insert="fragmentos/navbar :: navbar"></div>
+
+    <section class="joinus" id="secaoCadastroUsuario">
+        <div class="main_joinus_area m-y-3">
+            <div class="container">
+                <div class="row">
+                    <br>
+                    <br>
+                    <div class="col-md-8 col-md-offset-3 section-title">
+                        <h3>Redefinir sua senha</h3>
+                    </div>
+                </div>
+
+                <form name="redefinir" id="redefinir" th:action="@{/cadastro/redefinir}" method="POST">
+                	
+                	<div class="row">
+                        <div class="col-md-6">
+                            <label for="senha">Nova Senha*:</label>
+                            <div class="msgCampos" id="msgSenha"></div>
+                            <input type="password" id="senha" name="senha" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="confirma">Confirmar Senha*:</label>
+                            <input type="password" id="confirma" name="confirma" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a class="btn btn-default" onclick="confirmaNovaSenha()">
+                            	Alterar senha
+                            </a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div th:insert="fragmentos/imports-js :: js"></div>
+
+</body>
+
+</html>

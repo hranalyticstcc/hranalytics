@@ -1,12 +1,10 @@
 package br.com.hranalytics.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Dimensao {
@@ -19,21 +17,18 @@ public class Dimensao {
 	
 	private double porcentagem;
 	
-	@OneToMany
-	private List<DimensaoFilho> filhos;
-	
 	@ManyToOne
-	private Personalidade personalidade;
+	@JoinColumn(name="dimensoes",insertable=false,updatable=false)
+	private Fator fator;
 	
 	public Dimensao() {
 		super();
 	}
-	public Dimensao(Long id, String nome, double porcentagem, List<DimensaoFilho> filhos) {
+	public Dimensao(Long id, String nome, double porcentagem) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.porcentagem = porcentagem;
-		this.filhos = filhos;
 	}
 	public Long getId() {
 		return id;
@@ -53,14 +48,8 @@ public class Dimensao {
 	public void setPorcentagem(double porcentagem) {
 		this.porcentagem = porcentagem;
 	}
-	public List<DimensaoFilho> getFilhos() {
-		return filhos;
-	}
-	public void setFilhos(List<DimensaoFilho> filhos) {
-		this.filhos = filhos;
-	}
 	@Override
 	public String toString() {
-		return "Dimensao [id=" + id + ", nome=" + nome + ", porcentagem=" + porcentagem + ", filhos=" + filhos + "]";
+		return "DimensaoFilho [id=" + id + ", nome=" + nome + ", porcentagem=" + porcentagem + "]";
 	}
 }

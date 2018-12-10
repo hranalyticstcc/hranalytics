@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import twitter4j.Paging;
 import twitter4j.Status;
@@ -13,7 +13,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
-@Service
+@Component
 public class TwitterAPI {
 	
 	@Value("${twitter4j.consumer.key}")
@@ -35,9 +35,8 @@ public class TwitterAPI {
 
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		Twitter twitter = tf.getInstance();
-
-		// Parametros: Paging(Número de Páginas, Número por páginas)
-		Paging paging = new Paging(3, 300);
+		
+		Paging paging = new Paging(1, 15);
 		
 		List<Status> statuses = null;
 		try {
@@ -47,14 +46,14 @@ public class TwitterAPI {
 		}
 		
 		List<String> tweets = new ArrayList<String>();
-
+		
 		for (Status status : statuses) {
 			// Filtra a timeline pegando somente os tweets do usuário analisado
 			if (validaConteudo(status.getText())) {
 				tweets.add(status.getText());
 			}
 		}
-
+		
 		return tweets;
 	}
 

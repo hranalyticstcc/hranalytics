@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragmentos/header :: header">
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-3 section-title">
+            <h4>Olá <span th:text="${nomeCandidato}"></span></h4>
+            Esse e-mail é referente ao um cadastro no Hr Analytics
+            <br/>
+            Clique no botão abaixo e acesse o formulário de cadastro:
+            <br/>
+            <a class="btn btn-sm btn-primary" th:href="@{'http://localhost:8888/cadastro/' + ${id} + '/empresa/' + ${idEmpresa}}">
+            	Acessar Formulario
+            </a>
+            <br/>
+            <small>Você tem até 24 horas para preencher esse formulário. O não preenchimento do formulário pode influenciar na decisão do RH.</small>
+        </div>
+    </div>
+
+    
+    
+    <div th:insert="fragmentos/imports-js :: js"></div>
+    
+</body>
+
+</html>

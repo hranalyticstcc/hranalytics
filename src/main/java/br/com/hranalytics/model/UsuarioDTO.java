@@ -16,6 +16,7 @@ public class UsuarioDTO {
 	private String nomeUsuario;
 	private String senha;
 	private String email;
+	private String logradouro;
 	
 	public UsuarioDTO() {
 		super();
@@ -133,11 +134,19 @@ public class UsuarioDTO {
 		this.email = email;
 	}
 
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+	
 	@Override
 	public String toString() {
 		return "UsuarioDTO [nome=" + nome + ", situacao=" + situacao + ", cep=" + cep + ", numero=" + numero
 				+ ", status=" + status + ", message=" + message + ", cnpj=" + cnpj + ", cpf=" + cpf + ", telefone="
-				+ telefone + ", celular=" + celular + ", nomeFantasia=" + nomePessoaFisica + ", usuario=" + nomeUsuario
-				+ ", senha=" + senha + ", email=" + email + "]";
+				+ telefone + ", celular=" + celular + ", nomePessoaFisica=" + nomePessoaFisica + ", nomeUsuario="
+				+ nomeUsuario + ", senha=" + senha + ", email=" + email + ", logradouro=" + logradouro + "]";
 	}
 }

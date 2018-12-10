@@ -1,7 +1,7 @@
 package br.com.hranalytics.wsclient;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.ibm.watson.developer_cloud.personality_insights.v3.PersonalityInsights;
 import com.ibm.watson.developer_cloud.personality_insights.v3.model.Content;
@@ -9,7 +9,7 @@ import com.ibm.watson.developer_cloud.personality_insights.v3.model.Profile;
 import com.ibm.watson.developer_cloud.personality_insights.v3.model.ProfileOptions;
 import com.ibm.watson.developer_cloud.util.GsonSingleton;
 
-@Service
+@Component
 public class WatsonAPI {
 
 	@Value("${ibm.cloud.usuario}")

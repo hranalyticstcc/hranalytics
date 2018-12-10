@@ -1,12 +1,12 @@
 package br.com.hranalytics.wsclient;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import br.com.hranalytics.model.UsuarioDTO;
 import br.com.hranalytics.utils.ReceitaException;
 
-@Service
+@Component
 public class ReceitaWS {
 
 	private String ENDPOINT_RECEITA_WS = "https://www.receitaws.com.br/v1/cnpj/";

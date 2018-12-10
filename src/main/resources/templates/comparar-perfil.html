@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html 
-	xmlns:th="http://www.thymeleaf.org"
-	lang="pt-br">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 
 <head th:insert="fragmentos/header :: header">
     <meta charset="utf-8">
@@ -10,8 +8,8 @@
 <body data-spy="scroll" data-target=".navbar-desktop">
 
     <!--Navbar-->
-	<div th:insert="fragmentos/navbar :: navbar"></div>
-	
+    <div th:insert="fragmentos/navbar :: navbar"></div>
+
     <section class="joinus" id="CompararTwitter">
         <div class="main_joinus_area m-y-3">
             <div class="container">
@@ -20,35 +18,26 @@
                     <br>
                     <div class="col-md-8 col-md-offset-3 section-title">
                         <h3>Comparar Perfil</h3>
-                        <p>Faça a pesquisa de dois perfis para compara-los.</p>
                     </div>
                 </div>
 
                 <form name="compararTwitter" id="idCompararTwitter">
                     <div class="row">
                         <div class="col-md-6">
-                            <label>Perfil do Twitter:</label>
-                            <input type="text" id="IDcomparaTwitter" name="comparaTwitter" class="form-control" maxlength="20">
+                            <label>Perfil Candidatos:</label>
+                            <input type="text" id="perfil1" th:value="${perfil1.nome}" name="perfil1" class="form-control" maxlength="20" disabled>
+                            <input type="text" id="perfil2" th:value="${perfil2.nome}" name="perfil2" class="form-control" maxlength="20" disabled>
+                            <input type="hidden" id="twitter1" th:value="${perfil1.perfilTwitter}"/>
+                            <input type="hidden" id="twitter2" th:value="${perfil2.perfilTwitter}"/>
                         </div>
-                 
+
                         <div class="col-md-3"></div>
-                            
-                        <div class="col-md-3">
-                                <div class="row">
-                                        <label class="perfisCompara" id="twitter1"></label> 
-                                </div>
-                                
-                                <div class="row">
-                                        <label class="perfisCompara" id="twitter2"></label> 
-                                </div>
-                            </div>
 
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-default" id="IDbuscarPerfil" name="IDbuscarPerfil" onclick="buscar_validarTwitter()"> Buscar Perfil </button>
-                        
-                            <button type="button" class="btn btn-default" id="idCompararPerfil" name="compararPerfil" onclick="carregaCompararPerfil()" disabled> Comparar Twitter </button>
+                            <button type="button" class="btn btn-default" id="idCompararPerfil"
+                            	name="compararPerfil" onclick="carregaCompararPerfil()"> Comparar Candidatos</button>
                         </div>
                     </div>
                 </form>
@@ -65,28 +54,38 @@
                     </div>
 
                     <div class="row">
-                        <div id="comparaAbertura"><hr/></div>
+                        <div id="comparaAbertura">
+                            <hr/>
+                        </div>
                     </div>
 
-                    <br><br><br>
+                    <br>
+                    <br>
+                    <br>
 
                     <div class="row">
                         <div id="comparaConsciencia"></div>
                     </div>
 
-                    <br><br><br>
+                    <br>
+                    <br>
+                    <br>
 
                     <div class="row">
                         <div id="comparaExtroversao"></div>
                     </div>
 
-                        <br><br><br>
+                    <br>
+                    <br>
+                    <br>
 
                     <div class="row">
                         <div id="comparaAgradabilidade"></div>
                     </div>
 
-                    <br><br><br>
+                    <br>
+                    <br>
+                    <br>
 
                     <div class="row">
                         <div id="comparaNeuroticismo"></div>
@@ -96,8 +95,10 @@
         </div>
     </section>
     
+    <!-- grafico da google -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="/js/comparar.js"></script>
     <div th:insert="fragmentos/imports-js :: js"></div>
-    
 </body>
 
 </html>

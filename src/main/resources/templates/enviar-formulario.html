@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:insert="fragmentos/header :: header">
+    <meta charset="utf-8">
+</head>
+
+<body data-spy="scroll" data-target=".navbar-desktop">
+
+    <!--Navbar-->
+    <div th:insert="fragmentos/navbar :: navbar"></div>
+	
+    <section class="joinus" id="secaoBuscarTwitter">
+        <div class="main_joinus_area m-y-3">
+            <div class="container">
+                <div class="row">
+                    <br>
+                    <br>
+                    <div class="col-md-8 col-md-offset-3 section-title">
+                        <h3>Analisar Perfil</h3>
+                        <p>Faça a pesquisa do perfil para extrair os tweets.</p>
+                    </div>
+                </div>
+
+                <form name="buscarTweeter" id="formBuscarTweeter" th:action="@{/user/formcandidato}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="nomeCandidato">Nome:</label>
+                            <input type="text" id="nomeCandidato" name="nomeCandidato" class="form-control" maxlength="50">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emailCandidato">E-mail:</label>
+                            <input type="email" id="emailCandidato" name="emailCandidato" class="form-control" maxlength="50">
+                        </div>
+                    </div>
+                    <div th:if="${flag}">
+                    	<div class="alert alert-danger" th:text="${msg}">
+                        	
+                        </div>
+                    </div>
+                    <div th:if="${flag} == false">
+                    	<div class="alert alert-info" th:text="${msg}">
+                       	</div>
+                   	</div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-default">
+                                Enviar formulario
+                            </button>
+                        </div>
+                        <div class="col-md-2">
+                    		<a th:href="@{/user/dashboard}">
+                        		<button type="button" class="btn btn-danger">Cancelar</button>
+                        	</a>
+                    	</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div th:insert="fragmentos/imports-js :: js"></div>
+
+</body>
+
+</html>

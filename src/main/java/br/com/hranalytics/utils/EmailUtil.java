@@ -39,10 +39,18 @@ public class EmailUtil {
         }
     }
 	
-    public String constroiConteudo() {
+    public String constroiEmailConfirmacaoCadastroUsuario() {
 		Context context = new Context();
         context.setVariable("message", "Confirmacao de cadastro no HR Analytics");
         return templateEngine.process("email_confirmacao_cadastro", context);
+    }
+    
+    public String controiEmailFormularioCandidato(String nome, Long id, Long idEmpresa) {
+    	Context context = new Context();
+        context.setVariable("nomeCandidato", nome);
+        context.setVariable("id", id);
+        context.setVariable("idEmpresa", idEmpresa);
+        return templateEngine.process("email_cadastro_candidato", context);
     }
 
 }

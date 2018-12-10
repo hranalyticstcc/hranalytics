@@ -15,13 +15,13 @@ import br.com.hranalytics.service.AnaliseDePersonalidadeService;
 public class PersonalidadeWS {
 
 	@Autowired
-	private AnaliseDePersonalidadeService analise;
+	private AnaliseDePersonalidadeService service;
 
 	@ResponseBody
 	@GetMapping("/analisa/{perfil}")
 	public Personalidade analisaPersonalidade(@PathVariable String perfil) {
 		Personalidade personalidade = new Personalidade();
-		personalidade = analise.analisarPersonalidade(perfil);
+		personalidade = service.consultaPersonalidadeBd(perfil);
 
 		return personalidade;
 	}

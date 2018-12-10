@@ -18,8 +18,8 @@
             <!--Content for large and medium screens-->
             <div class="navbar-desktop">
                 <!--Navbar Brand-->
-                <a class="navbar-brand" href="index.html">
-                    <img src="img/logotipo2.png" alt="" />
+                <a class="navbar-brand" href="/">
+                    <img src="/img/logotipo2.png" alt="" />
                 </a>
                 <!--Links-->
                 <ul class="nav navbar-nav pull-right hidden-md-down text-uppercase" id="desktop-menu">
@@ -38,9 +38,6 @@
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <!--<li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>-->
                 </ul>
             </div>
         </div>
@@ -63,7 +60,7 @@
                 	<div th:if="${erros != null}">
                 		<div class="alert alert-danger"
                 			 th:each="erro : ${erros}"
-                			 th:text="${erro.getField().toUpperCase() + ': ' + erro.getDefaultMessage()}">
+                			 th:text="${erro.getDefaultMessage()}">
                 		</div>
                 	</div>
                     
@@ -91,11 +88,18 @@
                             <input type="text" id="nome" th:value="${usuariodto.nome}" th:field="*{nome}" class="form-control" readonly="readonly">
                         </div>
                     </div>
-
+                    
                     <div class="row">
                         <div class="col-md-6">
                             <label for="cep">CEP:</label>
                             <input type="text" id="cep" th:value="${usuariodto.cep}" th:field="*{cep}" class="form-control" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="logradouro">Logradouro:</label>
+                            <input type="text" id="logradouro" th:value="${usuariodto.logradouro}" th:field="*{logradouro}" class="form-control" readonly="readonly">
                         </div>
                         
                         <div class="col-md-6">
@@ -130,7 +134,7 @@
                             <label for="cpf">CPF*:</label>
                             <div class="msgCampos" id="msgCpf"></div>
                             <input type="text" id="cpf" th:field="*{cpf}" class="form-control" onkeypress="this.value = formatarCpf(event)"
-                                maxlength="14" onpaste="return false;">
+                                maxlength="14" onpaste="return false;" />
                         </div>
                         <div class="col-md-6">
                             <label for="telefone">Telefone:</label>
@@ -156,7 +160,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="nomeUsuario">Usuário*:</label>
-                            <input type="text" id="nomeUsuario" th:field="*{nomeUsuario}" class="form-control" maxlength="8">
+                            <input type="text" id="nomeUsuario" th:field="*{nomeUsuario}" class="form-control" maxlength="8"/>
                         </div>
                     </div>
 
@@ -164,14 +168,14 @@
                         <div class="col-md-6">
                             <label for="senha">Senha*:</label>
                             <div class="msgCampos" id="msgSenha"></div>
-                            <input type="password" id="senha" th:field="*{senha}" class="form-control" maxlength="8" onpaste="return false;">
+                            <input type="password" id="senha" name="senha" th:field="*{senha}" class="form-control"/>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <label>Confirmar Senha*:</label>
-                            <input type="password" id="IDconfirmarSenha" class="form-control" maxlength="8" onpaste="return false;">
+                            <label for="confirma">Confirmar Senha*:</label>
+                            <input type="password" id="confirma" name="confirma" class="form-control"/>
                         </div>
                     </div>
 
@@ -179,10 +183,9 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <!-- <button type="button" class="btn btn-default" onclick="finalizarCadastro()"> Finalizar cadastro
-                            </button> -->
-                            <button type="submit" class="btn btn-default"> Finalizar cadastro
-                            </button>
+                            <a class="btn btn-default" onclick="confirmaSenha()">
+                            	Finalizar cadastro
+                            </a>
                         </div>
                     </div>
 

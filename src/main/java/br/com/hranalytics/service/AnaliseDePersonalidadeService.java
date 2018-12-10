@@ -1,7 +1,6 @@
 package br.com.hranalytics.service;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +8,19 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 
+import br.com.hranalytics.model.Candidato;
 import br.com.hranalytics.model.Conteudo;
 import br.com.hranalytics.model.ConteudosWatsonDTO;
 import br.com.hranalytics.model.Dimensao;
-import br.com.hranalytics.model.DimensaoFilho;
+import br.com.hranalytics.model.Fator;
 import br.com.hranalytics.model.Personalidade;
+import br.com.hranalytics.repository.CandidatoRepository;
+import br.com.hranalytics.repository.PersonalidadeRepository;
+import br.com.hranalytics.utils.EmailUtil;
 import br.com.hranalytics.utils.Tradutor;
 import br.com.hranalytics.wsclient.TwitterAPI;
 import br.com.hranalytics.wsclient.WatsonAPI;
+import br.com.hranalytics.wsclient.YandexTradutorAPI;
 import twitter4j.JSONArray;
 import twitter4j.JSONException;
 import twitter4j.JSONObject;
@@ -26,15 +30,76 @@ public class AnaliseDePersonalidadeService {
 
 	@Autowired
 	private WatsonAPI watsonAPI;
-	
+
 	@Autowired
 	private TwitterAPI twitterAPI;
 
-	public Personalidade analisarPersonalidade(String perfil) {
-		List<String> tweets = null;
-		tweets = twitterAPI.pegaLinhaDoTempo(perfil);
+	@Autowired
+	private EmailUtil emailUtil;
 
-		String jsonEntradaWatson = constroiJsonEntradaWatson(tweets);
+	@Autowired
+	private PersonalidadeRepository personalidadeRepo;
+
+	@Autowired
+	private CandidatoRepository candidatoRepo;
+
+	@Autowired
+	private YandexTradutorAPI tradutorAPI;
+
+	public String enviarFormularioCadastroCandidato(String emailCandidato) {
+		emailUtil.enviarHtml(emailCandidato, "HR Analytics - Cadastro candidato",
+				emailUtil.constroiEmailConfirmacaoCadastroUsuario());
+
+		return "";
+	}
+
+	public Personalidade consultaPersonalidadeBd(String candidato) {
+		Personalidade personalidade = null;
+
+		Candidato candidatoBO = candidatoRepo.findByPerfilTwitter(candidato);
+		personalidade = personalidadeRepo.findByCandidato(candidatoBO);
+
+		if (personalidade == null)
+			personalidade = analisarPersonalidade(candidato, null);
+
+		return personalidade;
+	}
+
+	public List<String> traducaoParaIngles(List<String> lista) {
+
+		boolean precisaTraduzir = false;
+		List<String> listaTraduzida = null;
+
+		if (lista != null && !lista.isEmpty()) {
+			precisaTraduzir = tradutorAPI.precisaTraduzirDePortuguesParaIngles(lista.get(0));
+		}
+
+		if (precisaTraduzir) {			
+			listaTraduzida = new ArrayList<>();
+			
+			for (String texto : lista) {
+				listaTraduzida.add(tradutorAPI.traduzirTexto(texto));
+			}
+			
+			return listaTraduzida;
+		}
+		
+		return lista;
+	}
+
+	public Personalidade analisarPersonalidade(String perfil, List<String> listaRespostasQuestionario) {
+		List<String> textos = null;
+		textos = twitterAPI.pegaLinhaDoTempo(perfil);
+		
+		if(listaRespostasQuestionario != null && !listaRespostasQuestionario.isEmpty()) {
+			for (String txt : listaRespostasQuestionario) {
+				textos.add(txt);
+			}
+		}
+		
+		textos = traducaoParaIngles(textos);
+
+		String jsonEntradaWatson = constroiJsonEntradaWatson(textos);
 		String jsonSaidaWatson = watsonAPI.analisarPerfil(jsonEntradaWatson);
 
 		Personalidade personalidade = constroiPersonalidade(jsonSaidaWatson);
@@ -42,20 +107,17 @@ public class AnaliseDePersonalidadeService {
 		return personalidade;
 	}
 
-	public String constroiJsonEntradaWatson(List<String> tweets) {
+	public String constroiJsonEntradaWatson(List<String> textos) {
 
-		ConteudosWatsonDTO cwdto = new ConteudosWatsonDTO();
-		for (String tweet : tweets) {
-			cwdto.addContentItems(new Conteudo(tweet));
+		ConteudosWatsonDTO cw = new ConteudosWatsonDTO();
+		for (String texto : textos) {
+			cw.addContentItems(new Conteudo(texto));
 		}
 		Gson gson = new Gson();
-		return gson.toJson(cwdto);
+		return gson.toJson(cw);
 	}
 
 	public Personalidade constroiPersonalidade(String json) {
-
-		Calendar cal = Calendar.getInstance();
-		System.out.println("START TIME " + cal.getTime());
 
 		Personalidade personalidade = new Personalidade();
 
@@ -63,21 +125,21 @@ public class AnaliseDePersonalidadeService {
 			JSONObject jo = new JSONObject(json);
 			JSONArray arrayPersonalidade = jo.getJSONArray("personality");
 
-			List<Dimensao> bigFive = new ArrayList<>();
+			List<Fator> bigFive = new ArrayList<>();
 
 			for (int i = 0; i < arrayPersonalidade.length(); i++) {
 
-				Dimensao dim = new Dimensao();
+				Fator dim = new Fator();
 
 				JSONObject bigFiveJson = arrayPersonalidade.getJSONObject(i);
 				dim.setNome(Tradutor.traduzir(bigFiveJson.getString("trait_id")));
 				dim.setPorcentagem(bigFiveJson.getDouble("percentile"));
 
 				JSONArray children = bigFiveJson.getJSONArray("children");
-				List<DimensaoFilho> filhos = new ArrayList<>();
+				List<Dimensao> filhos = new ArrayList<>();
 
 				for (int j = 0; j < children.length(); j++) {
-					DimensaoFilho df = new DimensaoFilho();
+					Dimensao df = new Dimensao();
 
 					JSONObject childrenObject = children.getJSONObject(j);
 					df.setNome(Tradutor.traduzir(childrenObject.getString("trait_id")));
@@ -86,20 +148,21 @@ public class AnaliseDePersonalidadeService {
 					filhos.add(df);
 				}
 
-				dim.setFilhos(filhos);
+				dim.setDimensoes(filhos);
 				bigFive.add(dim);
 			}
 
-			personalidade.setBigFive(bigFive);
+			personalidade.setFatores(bigFive);
 
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 
-		Calendar cal2 = Calendar.getInstance();
-		System.out.println("END TIME " + cal2.getTime());
-
 		return personalidade;
+	}
+	
+	public Candidato consultaCandidato(Long id) {
+		return candidatoRepo.findById(id).get();
 	}
 
 }

@@ -3,6 +3,7 @@
 CSS
 
 */
+-webkit-appearance: none;
 html,
 body{
     font-size:18px;

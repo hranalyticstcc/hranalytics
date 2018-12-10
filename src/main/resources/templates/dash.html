@@ -17,156 +17,81 @@
                     <br>
                     <br>
                     <div class="col-md-8 col-md-offset-3 section-title">
-                        <h3>Analisar Perfil</h3>
-                        <p>Faça a pesquisa do perfil para extrair os tweets.</p>
+                        <h3>Candidatos</h3>
+                        <p>Cadastros liberados para análise de perfil.</p>
                     </div>
                 </div>
-
-                <form name="buscarTweeter" id="formBuscarTweeter" method="post">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Perfil do Twitter:</label>
-                            <input type="text" id="usuarioTweeter" name="usuarioCandidato" class="form-control" maxlength="20">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-default" onclick="validaUsuarioTweeter()"> Buscar Perfil
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <hr/>
-            
-            <!-- DashBoard -->
-            <div class="container">
-                <div class="dashboard" id="IDdashboard">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-3 section-title">
-                            <h4>Personalidades Big Five:</h4>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div id="columnchart_values1"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div id="columnchart_values2"></div>
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div id="columnchart_values3"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div id="columnchart_values4"></div>
-                        </div>
-                    </div>
-
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div id="columnchart_values5"></div>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-3 section-title">
-                            <h4>Formulário do candidato:</h4>
-                        </div>
-                    </div>
-
-                    <form name="salvarPerfilCandidato" id="candidato">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Nome:*</label>
-                                <input type="text" id="IDnomeCandidato" name="nomeCandidato" class="form-control" maxlength="50" onkeypress="">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label>Data Nascimento:*</label>
-                                <input type="text" id="IDdataNascimentoCandidato" name="dataNascimentoCandidato" maxlength="10" onkeypress="this.value = formatarData(event)"
-                                    class="form-control">
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Formação:*</label>
-                                <input type="text" id="IDformacaoCandidato" name="formacaoCandidato" maxlength="50" class="form-control">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label>Descrição Último Cargo:*</label>
-                                <input type="text" id="IDultimoCargoCandidato" name="ultimoCargoCandidato" maxlength="50" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Departamento de atuação:*</label>
-                                <input type="text" id="IDdepAtuacao" name="depAtuacao" class="form-control" maxlength="50">្
-                                <!--readonly="readonly"-->
-                            </div>
-
-                            <div class="col-md-6">
-                                <label>Descrição do cargo:*</label>
-                                <input type="text" id="IDdescCargo" name="descCargo" class="form-control" maxlength="50">
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Trabalha na área:*</label>
-                                <select class="form-control" type="text" id="IDtrabalhaArea" name="trabalhaArea" maxlength="50">
-                                    <option selected>Não</option>
-                                    <option>Sim</option>
-                                </select>
-                            </div>
-
-
-                            <div class="col-md-6">
-                                <label>Situação*</label>
-                                <select class="form-control" type="text" id="IDsituacao" name="situacao" maxlength="50">
-                                    <option selected>Em análise</option>
-                                    <option>Aprovado</option>
-                                    <option>Reprovado</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Anotações:</label>
-                                <textarea class="form-control" id="IDobservacao" name="observacao" rows="3" maxlength="250"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="col-md-6">
-                                    <button type="button" class="btn btn-default" onclick="salvarPerfil()"> Salvar Perfil
-                                    </button>
+				
+                <table class="table table-sm table-striped table-hover table-bordered" id="candidatos">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Data de Nascimento</th>
+                            <th>Email</th>
+                            <th>Perfil Twitter</th>
+                            <th>Status</th>
+                            <th>Comparar</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="candidato : ${candidatos}">
+                            <td th:text="${candidato.nome}" th:id="'nome' + ${candidato.id}"></td>
+                            <td th:text="${#dates.format(candidato.dataNascimento, 'dd/MM/yyyy')}"></td>
+                            <td th:text="${candidato.email}"></td>
+                            <td th:text="${candidato.perfilTwitter}"></td>
+                            <td th:text="${candidato.statusAnalise}"></td>
+                            <td>
+                            	<div class="btn-group">
+                                    <button class="btn btn-sm btn-primary" th:id="'sel' + ${candidato.id}" th:onclick="'selecionarPerfilParaComparar('+ ${candidato.id} +')'">Selecionar</button>
                                 </div>
-                            </div>
-                        </div>
-
-                    </form>
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-sm btn-primary" th:href="@{'/user/analisar/' + ${candidato.id}}">Detalhes</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div id="comparar">
+                	<hr/>
+                	<form id="comparacao" class="form-inline" th:action="@{/user/comparar}" method="POST">
+                		<div class="form-group mx-sm-1 mb-1">
+                			<input id="perfil1" type="text" class="form-control" placeholder="Perfil 1" disabled/>
+                		</div>
+                		<div class="form-group mx-sm-1 mb-1">
+                			<input id="perfil2" type="text" class="form-control" placeholder="Perfil 2" disabled/>
+                		</div>
+                		<input type="hidden" name="id1" id="id1"/>
+                		<input type="hidden" name="id2" id="id2"/>
+                		<div class="form-group mx-sm-1 mb-1">
+                			<button id="btnComparar" class="btn btn-primary" onclick="comparar()" disabled>Comparar</button>
+                		</div>
+                		<div class="form-group mx-sm-1 mb-1">
+                			<a class="btn btn-primary" onclick="limparPerfilParaComparar()">Limpar</a>
+                		</div>
+                	</form>
+                	<hr/>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- grafico da google -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <section class="joinus" id="secaoBuscarTwitter">
+        <div class="main_joinus_area m-y-3">
+            <div class="container">
+            	<div class="row">
+                	<div class="col-md-6">
+                    	<a th:href="@{/user/pagesendformcandidato}">
+                        	<button type="button" class="btn btn-default">Adicionar Candidato</button>
+                        </a>
+                    </div>
+               	</div>
+            </div>
+        </div>
+    </section>
 
     <div th:insert="fragmentos/imports-js :: js"></div>
 
